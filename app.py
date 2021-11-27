@@ -103,7 +103,7 @@ class NuguApi(Resource):
       response = urllib.request.urlopen(request)
       rescode = response.getcode()
       if(rescode==200):
-         response_body = json.loads(response)
+         response_body = json.loads(response.read())
          print(response_body);
       else:
          print("Error Code:" + rescode)
