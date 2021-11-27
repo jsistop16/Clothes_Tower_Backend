@@ -113,7 +113,7 @@ class NuguApi(Resource):
          "output": {
          "date" : date,     # backend parameter
          "location" : location,  # utterance parameter 1 
-         "message": response_body.items[0].title.decode('utf-8')},   # utterance parameter 2
+         "message": response_body.decode('utf-8').items[0].title},   # utterance parameter 2
             "directives": []
               }
       
