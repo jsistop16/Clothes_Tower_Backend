@@ -1,4 +1,3 @@
-
 import os
 import sys
 import urllib.request 
@@ -10,14 +9,13 @@ from flask_restx import Api, Resource
 from dataclasses import dataclass 
 from flask_sqlalchemy import SQLAlchemy
 
-
-# =================
-
+# =============== basic setting ===================
 
 
-# ================
 
-# App 세팅하는 과정 
+
+#============== App 세팅하는 과정 =================
+
 app = Flask(__name__);
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("FLASK_DB")  # 환경변수를 사용해서 RDS HOST를 숨김 
 app.config['SQLALCHEMY_ECHO'] = True;
@@ -25,7 +23,9 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False;
 #172.17.0.1 우분투 배포 
 #host.docker.internal 윈도우에서 테스트해볼때
 
-# DB 세팅하는 과정 
+
+# =========== DB 세팅하는 과정 ==============
+
 db = SQLAlchemy(app);
 
 # Cloth 데이터 직렬화를 위해서 @dataclass 데코레이터를 사용함 
@@ -48,7 +48,8 @@ class Cloth(db.Model):
 
 
 
-# REST API 세팅하는 과정 
+#============ REST API 세팅하는 과정 ================
+
 api = Api(app);
 @api.route("/cloth")
 class GetAndPostClothes(Resource):
@@ -91,9 +92,11 @@ class NuguApi(Resource):
       global todo2;
       todo2 = request2.json;
       
-      # date = todo2.get("action").get("parameters").get("date").get("value");
+      # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱 
       location = todo2.get("action").get("parameters").get("location").get("value");
       
+      
+      # open api 호출 코드 
       client_id = os.environ.get("YOUR_CLIENT_ID")
       client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
       encText = urllib.parse.quote(location);
@@ -108,6 +111,9 @@ class NuguApi(Resource):
          print(response_body['items'][random.randrange(1,5)]['title']);
       else:
          print("Error Code:" + rescode)
+         
+      # nugu speaker로 다시 전송할 데이터 
+         
       data =  {
          "version": "2.0",
          "resultCode": "OK",
@@ -118,6 +124,7 @@ class NuguApi(Resource):
             "directives": []
               }
       
+      # 실제 데이터 응답 
       return jsonify(data);
    
 
