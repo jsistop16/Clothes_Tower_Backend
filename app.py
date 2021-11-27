@@ -1,10 +1,19 @@
-from datetime import datetime
+
 import os
+import sys
+import urllib.request
+from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_restx import Api, Resource
 from dataclasses import dataclass 
 from flask_sqlalchemy import SQLAlchemy
 
+
+# =================
+
+
+
+# ================
 
 # App 세팅하는 과정 
 app = Flask(__name__);
@@ -80,14 +89,29 @@ class NuguApi(Resource):
       global todo2;
       todo2 = request.json;
       
-      print(todo2.get("action").get("parameters").get("date"));
-      print(todo2.get("action").get("parameters").get("location"));
+      date = todo2.get("action").get("parameters").get("date").get("value");
+      location = todo2.get("action").get("parameters").get("location").get("value");
+      
+      client_id = os.environ.get("YOUR_CLIENT_ID")
+      client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
+      encText = urllib.parse.quote("자동차")
+      url = "https://openapi.naver.com/v1/search/blog?query=" + encText # json 결과
+      request = urllib.request.Request(url)
+      request.add_header("X-Naver-Client-Id",client_id)
+      request.add_header("X-Naver-Client-Secret",client_secret)
+      response = urllib.request.urlopen(request)
+      rescode = response.getcode()
+      if(rescode==200):
+         response_body = response.read()
+         print(response_body.decode('utf-8'))
+      else:
+         print("Error Code:" + rescode)
       data =  {
          "version": "2.0",
          "resultCode": "OK",
          "output": {
-         "date" : todo2.get("action").get("parameters").get("date").get("value"),     # backend parameter
-         "location" : todo2.get("action").get("parameters").get("location").get("value"),  # utterance parameter 1 
+         "date" : date,     # backend parameter
+         "location" : location,  # utterance parameter 1 
          "message": "맑아"},   # utterance parameter 2
             "directives": []
               }
