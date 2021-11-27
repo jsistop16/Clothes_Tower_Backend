@@ -59,8 +59,8 @@ class GetAndPostClothes(Resource):
      db.session.remove();
      return jsonify(todo); 
 
-@api.route("answer-weather")
-class nuguApi(Resource):
+@api.route("/answer-weather")
+class NuguApi(Resource):
    
    def post(self):
       global todo2;
