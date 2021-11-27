@@ -3,7 +3,7 @@ import os
 import sys
 import urllib.request 
 from datetime import datetime
-from flask import Flask, jsonify
+from flask import Flask, json, jsonify
 from flask import request as request2
 from flask_restx import Api, Resource
 from dataclasses import dataclass 
@@ -103,7 +103,7 @@ class NuguApi(Resource):
       response = urllib.request.urlopen(request)
       rescode = response.getcode()
       if(rescode==200):
-         response_body = response
+         response_body = json.loads(response)
          print(response_body);
       else:
          print("Error Code:" + rescode)
