@@ -80,7 +80,8 @@ class NuguApi(Resource):
       global todo2;
       todo2 = request.json;
       
-      print(todo2.get("action"));
+      print(todo2.get("action").get("parameters").get("date"));
+      print(todo2.get("action").get("parameters").get("location"));
       data =  {
          "version": "2.0",
          "resultCode": "OK",
