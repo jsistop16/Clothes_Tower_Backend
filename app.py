@@ -35,59 +35,6 @@ class Cloth(db.Model):
    material = db.Column(db.String(20))
 
 
-# s3 관련 세부 설정 
-# def s3_connection():
-#     '''
-#     s3 bucket에 연결
-#     :return: 연결된 s3 객체
-#     '''
-#     try:
-#         s3 = boto3.client(
-#             service_name='s3',
-#             region_name=
-#             aws_access_key_id=
-#             aws_secret_access_key=
-#         )
-#     except Exception as e:
-#         print(e)
-#         exit(ERROR_S3_CONNECTION_FAILED)
-#     else:
-#         print("s3 bucket connected!")
-#         return s3
-
-# def s3_put_object(s3, bucket, filepath, access_key):
-#     '''
-#     s3 bucket에 지정 파일 업로드
-#     :param s3: 연결된 s3 객체(boto3 client)
-#     :param bucket: 버킷명
-#     :param filepath: 파일 위치
-#     :param access_key: 저장 파일명
-#     :return: 성공 시 True, 실패 시 False 반환
-#     '''
-#     try:
-#         s3.upload_file(filepath, bucket, access_key)
-#     except Exception as e:
-#         print(e)
-#         return False
-#     return True
-    
-# def s3_get_object(s3, bucket, object_name, file_name):
-#     '''
-#     s3 bucket에서 지정 파일 다운로드
-#     :param s3: 연결된 s3 객체(boto3 client)
-#     :param bucket: 버킷명
-#     :param object_name: s3에 저장된 object 명
-#     :param file_name: 저장할 파일 명(path)
-#     :return: 성공 시 True, 실패 시 False 반환
-#     '''
-#     try:
-#         s3.download_file(bucket, object_name, file_name)
-#     except Exception as e:
-#         print(e)
-#         return False
-#     return True
-# # s3 관련 세부 설정 끝 
-# s3 = s3_connection()
 
 # REST API 세팅하는 과정 
 api = Api(app);
@@ -108,8 +55,8 @@ class GetAndPostClothes(Resource):
 
      clothes= Cloth(top_bottom=todo.get("top_bottom"),long_short=todo.get("long_short"),color=todo.get("color"),material=todo.get("material"));
      db.session.add(clothes);
-     db.session.commit()
-     db.session.remove()
+     db.session.commit();
+     db.session.remove();
      return jsonify(todo); 
 
 
