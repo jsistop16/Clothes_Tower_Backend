@@ -95,7 +95,7 @@ class NuguApi(Resource):
       
       client_id = os.environ.get("YOUR_CLIENT_ID")
       client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
-      encText = urllib.parse.quote("자동차")
+      encText = urllib.parse.quote(location);
       url = "https://openapi.naver.com/v1/search/blog?query=" + encText # json 결과
       request = urllib.request.Request(url)
       request.add_header("X-Naver-Client-Id",client_id)
@@ -113,7 +113,7 @@ class NuguApi(Resource):
          "output": {
          "date" : date,     # backend parameter
          "location" : location,  # utterance parameter 1 
-         "message": response_body['items'][0]['bloggerlink']},   # utterance parameter 2
+         "message": response_body['items'][0]['title']},   # utterance parameter 2
             "directives": []
               }
       
