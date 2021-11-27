@@ -2,6 +2,7 @@
 import os
 import sys
 import urllib.request 
+import random
 from datetime import datetime
 from flask import Flask, json, jsonify
 from flask import request as request2
@@ -104,7 +105,7 @@ class NuguApi(Resource):
       rescode = response.getcode()
       if(rescode==200):
          response_body = json.loads(response.read())
-         print(response_body['items'][0]['title']);
+         print(response_body['items'][random.randrange(1,7)]['title']);
       else:
          print("Error Code:" + rescode)
       data =  {
@@ -113,7 +114,7 @@ class NuguApi(Resource):
          "output": {
          "date" : date,     # backend parameter
          "location" : location,  # utterance parameter 1 
-         "message": response_body['items'][0]['title']},   # utterance parameter 2
+         "message": response_body['items'][random.randrange(1,7)]['title']},   # utterance parameter 2
             "directives": []
               }
       
