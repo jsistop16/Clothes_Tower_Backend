@@ -1,0 +1,8 @@
+Flask==1.1.2
+flask_sqlalchemy
+sqlalchemy
+mysqlclient
+# uWSGI
+mysql-connector-python
+flask_restx
+pymysql
