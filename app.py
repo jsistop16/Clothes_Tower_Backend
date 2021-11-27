@@ -96,7 +96,7 @@ class NuguApi(Resource):
       client_id = os.environ.get("YOUR_CLIENT_ID")
       client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
       encText = urllib.parse.quote(location);
-      url = "https://openapi.naver.com/v1/search/blog?query=" + encText # json 결과
+      url = "https://openapi.naver.com/v1/search/local?query=" + encText # json 결과
       request = urllib.request.Request(url)
       request.add_header("X-Naver-Client-Id",client_id)
       request.add_header("X-Naver-Client-Secret",client_secret)
@@ -104,7 +104,7 @@ class NuguApi(Resource):
       rescode = response.getcode()
       if(rescode==200):
          response_body = json.loads(response.read())
-         print(response_body['items'][0]['bloggerlink']);
+         print(response_body['items'][0]['title']);
       else:
          print("Error Code:" + rescode)
       data =  {
