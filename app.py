@@ -97,7 +97,7 @@ class NuguApi(Resource):
       client_id = os.environ.get("YOUR_CLIENT_ID")
       client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
       encText = urllib.parse.quote(location);
-      url = "https://openapi.naver.com/v1/search/local?query=" + encText # json 결과
+      url = "https://openapi.naver.com/v1/search/local?query="+encText+"&display=5" # json 결과
       request = urllib.request.Request(url)
       request.add_header("X-Naver-Client-Id",client_id)
       request.add_header("X-Naver-Client-Secret",client_secret)
