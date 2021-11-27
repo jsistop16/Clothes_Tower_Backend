@@ -104,7 +104,7 @@ class NuguApi(Resource):
       rescode = response.getcode()
       if(rescode==200):
          response_body = json.loads(response.read())
-         print(response_body.items);
+         print(response_body.items[0]);
       else:
          print("Error Code:" + rescode)
       data =  {
