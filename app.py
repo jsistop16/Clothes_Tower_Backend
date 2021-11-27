@@ -86,8 +86,8 @@ class NuguApi(Resource):
          "version": "2.0",
          "resultCode": "OK",
          "output": {
-         "date" : todo2.get("action").get("parameters").get("date"),     # backend parameter
-         "location" : "명동",  # utterance parameter 1 
+         "date" : todo2.get("action").get("parameters").get("date").get("value"),     # backend parameter
+         "location" : todo2.get("action").get("parameters").get("location").get("value"),  # utterance parameter 1 
          "message": "맑아"},   # utterance parameter 2
             "directives": []
               }
