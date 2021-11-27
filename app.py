@@ -66,7 +66,7 @@ class NuguApi(Resource):
       global todo2;
       todo2 = request.json;
       print(todo2);
-      
+      return "success";
    
    
    
