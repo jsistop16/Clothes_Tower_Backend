@@ -79,7 +79,8 @@ class NuguApi(Resource):
    def post(self):
       global todo2;
       todo2 = request.json;
-      print(todo2);
+      
+      print(todo2.get("action"));
       data =  {
          "version": "2.0",
          "resultCode": "OK",
