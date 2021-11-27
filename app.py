@@ -114,7 +114,7 @@ class NuguApi(Resource):
          "output": {
          "date" : date,     # backend parameter
          "location" : location,  # utterance parameter 1 
-         "message": response_body['items'][random.randrange(1,7)]['title']},   # utterance parameter 2
+         "message": response_body['items'][random.randrange(1,3)]['title']},   # utterance parameter 2
             "directives": []
               }
       
