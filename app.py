@@ -70,7 +70,9 @@ class NuguApi(Resource):
          "version": "2.0",
          "resultCode": "OK",
          "output": {
-         "message": "오늘"},
+         "date" : "오늘",
+         "location" : "명동",
+         "message": "맑아"},
             "directives": []
               }
       
