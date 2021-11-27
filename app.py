@@ -66,7 +66,17 @@ class NuguApi(Resource):
       global todo2;
       todo2 = request.json;
       print(todo2);
-      return "success";
+      data =  {
+         "version": "2.0",
+         "resultCode": "OK",
+         "output": {
+         "message": "오늘"},
+            "directives": []
+              }
+      
+      
+      
+      return jsonify(data);
    
    
    
