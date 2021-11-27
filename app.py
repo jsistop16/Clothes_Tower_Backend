@@ -5,9 +5,10 @@ from flask_restx import Api, Resource
 from dataclasses import dataclass 
 from flask_sqlalchemy import SQLAlchemy
 
+
 # App 세팅하는 과정 
 app = Flask(__name__);
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("FLASK_DB")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("FLASK_DB")  # 환경변수를 사용해서 RDS HOST를 숨김 
 app.config['SQLALCHEMY_ECHO'] = True;
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False;
 #172.17.0.1 우분투 배포 
@@ -59,34 +60,6 @@ class GetAndPostClothes(Resource):
      db.session.remove();
      return jsonify(todo); 
 
-@api.route("/answer-weather")
-class NuguApi(Resource):
-   
-   def post(self):
-      global todo2;
-      todo2 = request.json;
-      print(todo2);
-      data =  {
-         "version": "2.0",
-         "resultCode": "OK",
-         "output": {
-         "date" : "오늘",
-         "location" : "명동",
-         "message": "맑아"},
-            "directives": []
-              }
-      
-      
-      
-      return jsonify(data);
-   
-   
-   
-   
-   
-   
-   
-   
 # 데이터 삭제 
 @api.route("/cloth/<int:cloth_id>")
 class DeleteClothes(Resource):
@@ -96,6 +69,30 @@ class DeleteClothes(Resource):
       db.session.commit();
       db.session.remove();
       return "delete success";
+
+
+# NUGU와 관련된 API 
+@api.route("/answer-weather")
+class NuguApi(Resource):
+   
+   # NUGU에게 적절한 응답을 내려주는 과정 
+   def post(self):
+      global todo2;
+      todo2 = request.json;
+      print(todo2);
+      data =  {
+         "version": "2.0",
+         "resultCode": "OK",
+         "output": {
+         "date" : "오늘",     # backend parameter
+         "location" : "명동",  # utterance parameter 1 
+         "message": "맑아"},   # utterance parameter 2
+            "directives": []
+              }
+      
+      return jsonify(data);
+   
+
 
 
   
