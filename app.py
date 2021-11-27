@@ -104,7 +104,7 @@ class NuguApi(Resource):
       rescode = response.getcode()
       if(rescode==200):
          response_body = json.loads(response.read())
-         print(response_body['items'][0]);
+         print(response_body['items'][0]['bloggerlink']);
       else:
          print("Error Code:" + rescode)
       data =  {
@@ -113,7 +113,7 @@ class NuguApi(Resource):
          "output": {
          "date" : date,     # backend parameter
          "location" : location,  # utterance parameter 1 
-         "message": "hello"},   # utterance parameter 2
+         "message": response_body['items'][0]['bloggerlink']},   # utterance parameter 2
             "directives": []
               }
       
