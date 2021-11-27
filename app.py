@@ -91,7 +91,7 @@ class NuguApi(Resource):
       global todo2;
       todo2 = request2.json;
       
-      date = todo2.get("action").get("parameters").get("date").get("value");
+      # date = todo2.get("action").get("parameters").get("date").get("value");
       location = todo2.get("action").get("parameters").get("location").get("value");
       
       client_id = os.environ.get("YOUR_CLIENT_ID")
@@ -112,7 +112,7 @@ class NuguApi(Resource):
          "version": "2.0",
          "resultCode": "OK",
          "output": {
-         "date" : date,     # backend parameter
+             # backend parameter
          "location" : location,  # utterance parameter 1 
          "message": response_body['items'][random.randrange(1,5)]['title']},   # utterance parameter 2
             "directives": []
