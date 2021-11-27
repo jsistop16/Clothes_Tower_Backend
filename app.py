@@ -1,9 +1,10 @@
 
 import os
 import sys
-import urllib.request
+import urllib.request 
 from datetime import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
+from flask import request as request2
 from flask_restx import Api, Resource
 from dataclasses import dataclass 
 from flask_sqlalchemy import SQLAlchemy
@@ -60,7 +61,7 @@ class GetAndPostClothes(Resource):
    def post(self):
      
      global todo;
-     todo = request.json;
+     todo = request2.json;
      
 
      clothes= Cloth(top_bottom=todo.get("top_bottom"),long_short=todo.get("long_short"),color=todo.get("color"),material=todo.get("material"));
@@ -87,7 +88,7 @@ class NuguApi(Resource):
    # NUGU에게 적절한 응답을 내려주는 과정 
    def post(self):
       global todo2;
-      todo2 = request.json;
+      todo2 = request2.json;
       
       date = todo2.get("action").get("parameters").get("date").get("value");
       location = todo2.get("action").get("parameters").get("location").get("value");
