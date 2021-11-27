@@ -59,7 +59,22 @@ class GetAndPostClothes(Resource):
      db.session.remove();
      return jsonify(todo); 
 
-
+@api.route("answer-weather")
+class nuguApi(Resource):
+   
+   def post(self):
+      global todo2;
+      todo2 = request.json;
+      print(todo2);
+      
+   
+   
+   
+   
+   
+   
+   
+   
 # 데이터 삭제 
 @api.route("/cloth/<int:cloth_id>")
 class DeleteClothes(Resource):
@@ -69,7 +84,8 @@ class DeleteClothes(Resource):
       db.session.commit();
       db.session.remove();
       return "delete success";
-   
+
+
   
 if __name__ == "__main__":
     db.create_all();
