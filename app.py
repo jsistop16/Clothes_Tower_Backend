@@ -192,7 +192,7 @@ class NuguArrangement(Resource):
           cnt1 = 0
           cnt2 = 0 
           
-          for i in range(1,num):
+          for i in range(0,num):
              if list1[i] < 12:
                 print(list1[i]);
                 cnt1 += 1
