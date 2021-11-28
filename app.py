@@ -209,7 +209,7 @@ class NuguArrangement(Resource):
             "output": {
              # backend parameter
             "location" : "location",  # utterance parameter 1 
-            "message":  answer
+            "message2":  answer
             
             },   # utterance parameter 2
              "directives": []
