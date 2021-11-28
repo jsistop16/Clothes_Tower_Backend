@@ -97,9 +97,9 @@ class NuguApi(Resource):
    def post(self):
       
       #장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱
-      global todo2;
-      todo2 = request2.json;
-      location = todo2.get("action").get("parameters").get("location").get("value");
+      # global todo2;
+      # todo2 = request2.json;
+      # location = todo2.get("action").get("parameters").get("location").get("value");
          
       # 실시간으로 공공데이터 기상 api에서 기온 정보를 받아옴
       tz = pytz.timezone('Asia/Seoul')
