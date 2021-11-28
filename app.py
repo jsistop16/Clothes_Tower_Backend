@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import pytz
 # import urllib.request
 import schedule
 import requests 
@@ -106,8 +107,11 @@ class NuguApi(Resource):
    def post(self):
       global todo2;
       todo2 = request2.json;
-      current_time = datetime.now().time()
-      print(current_time);
+      tz = pytz.timezone('Asia/Seoul')
+      cur_time = datetime.now(tz);
+      simple_cur_time = cur_time.strftime("%H:%M");
+      print(simple_cur_time);
+      
       # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱 
       location = todo2.get("action").get("parameters").get("location").get("value");
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
