@@ -20,7 +20,8 @@ list1 = [];
 #============== App 세팅하는 과정 =================
 
 app = Flask(__name__);
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("FLASK_DB")  # 환경변수를 사용해서 RDS HOST를 숨김 
+# 환경변수를 사용해서 RDS HOST를 숨김 
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("FLASK_DB")  
 app.config['SQLALCHEMY_ECHO'] = True;
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False;
 #172.17.0.1 우분투 배포 
@@ -69,7 +70,10 @@ class GetAndPostClothes(Resource):
      todo = request2.json;
      
 
-     clothes= Cloth(top_bottom=todo.get("top_bottom"),long_short=todo.get("long_short"),color=todo.get("color"),material=todo.get("material"));
+     clothes= Cloth(top_bottom=todo.get("top_bottom"),
+                    long_short=todo.get("long_short"),
+                    color=todo.get("color"),
+                    material=todo.get("material"));
      db.session.add(clothes);
      db.session.commit();
      db.session.remove();
@@ -96,11 +100,6 @@ class NuguApi(Resource):
    
    def post(self):
       
-      #장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱
-      # global todo2;
-      # todo2 = request2.json;
-      # location = todo2.get("action").get("parameters").get("location").get("value");
-         
       # 실시간으로 공공데이터 기상 api에서 기온 정보를 받아옴
       tz = pytz.timezone('Asia/Seoul')
       cur_time = datetime.now(tz);
@@ -146,7 +145,7 @@ class NuguApi(Resource):
         base_date=today_date
         base_time="2300"
       
-
+      # 실제로 공공데이터 api에서 데이터를 가지고 오는 로직 
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
                'pageNo' : '1', 'numOfRows' : '1',
@@ -157,11 +156,13 @@ class NuguApi(Resource):
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
       if(int(response2) <= 10):
-         answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다. 긴 옷을 추천드립니다. 스마트 클로젯을 실행할까요?"   
+         answer = "현재 시각, 오늘의 날씨는 "
+         + response2 
+         + "도 입니다. 긴 옷을 추천드립니다. 스마트 클로젯을 실행할까요?"   
       else:
         answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다."
         
-      list1.append(response2);
+      list1.append(int(response2));
       
       
       
@@ -184,10 +185,39 @@ class NuguApi(Resource):
       # 실제 데이터 응답 
       return jsonify(data);
    
-
+@api.route("answer-arrangement")
+class NuguArrangement(Resource):
+    def post(self):
+          
+          num = len(list1)
+          
+          cnt1 = 0
+          cnt2 = 0 
+          
+          for i in range(0,num):
+             if list1[i] < 12:
+                cnt1 += 1
+             else:
+                cnt2 += 1
+         
+       if cnt1 >= 4 :
+          answer = "겨울이 다가왔습니다. 어느 계절 옷을 정리하시겠습니까?"
+       else:
+          answer = "환절기입니다. 여러 종류의 옷을 구비해 두시는게 좋을 것 같네요. 그래도 옷장을 정리하시겠습니까?"
+       data =  {
+         "version": "2.0",
+         "resultCode": "OK",
+         "output": {
+             # backend parameter
+         "location" : "location",  # utterance parameter 1 
+         "message":  answer
+            
+         },   # utterance parameter 2
+            "directives": []
+              }
 
 if __name__ == "__main__":
    
     db.create_all();
-    app.run(host='127.0.0.1', debug=False);
+    app.run(host='0.0.0.0', debug=False);
    
