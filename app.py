@@ -185,7 +185,7 @@ class NuguApi(Resource):
       # 실제 데이터 응답 
       return jsonify(data);
    
-@api.route("answer-arrangement")
+@api.route("/answer-arrangement")
 class NuguArrangement(Resource):
     def post(self):
           
