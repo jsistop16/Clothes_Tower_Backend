@@ -97,22 +97,100 @@ class NuguApi(Resource):
       
       
       # open api 호출 코드 
-      client_id = os.environ.get("YOUR_CLIENT_ID")
-      client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
-      encText = urllib.parse.quote(location);
-      url = "https://openapi.naver.com/v1/search/local?query="+encText+"&display=5" # json 결과
-      request = urllib.request.Request(url)
-      request.add_header("X-Naver-Client-Id",client_id)
-      request.add_header("X-Naver-Client-Secret",client_secret)
+      # client_id = os.environ.get("YOUR_CLIENT_ID")
+      # client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
+      # encText = urllib.parse.quote(location);
+      # url = "https://openapi.naver.com/v1/search/local?query="+encText+"&display=5" # json 결과
+      # request = urllib.request.Request(url)
+      # request.add_header("X-Naver-Client-Id",client_id)
+      # request.add_header("X-Naver-Client-Secret",client_secret)
+      # response = urllib.request.urlopen(request)
+      # rescode = response.getcode()
+      # if(rescode==200):
+      #    response_body = json.loads(response.read())
+      #    print(response_body['items'][random.randrange(1,5)]['title']);
+      # else:
+      #    print("Error Code:" + rescode)
+         
+         
+         
+         # 기상예보 서비스 
+      url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'
+      params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1000', 'dataType' : 'XML', 'base_date' : '20210628', 'base_time' : '0600', 'nx' : '55', 'ny' : '127' }
+      request = urllib.request.Request(url,params)
       response = urllib.request.urlopen(request)
       rescode = response.getcode()
       if(rescode==200):
          response_body = json.loads(response.read())
-         print(response_body['items'][random.randrange(1,5)]['title']);
+         # print(response_body['items'][random.randrange(1,5)]['title']);
+         print(response.content)
       else:
-         print("Error Code:" + rescode)
+          print("Error Code:" + rescode)
          
-      # nugu speaker로 다시 전송할 데이터 
+      # # nugu speaker로 다시 전송할 데이터 
+      
+      # weather
+      
+      # list1.append(weather)
+      
+      # if len(list1)%5 == 0:
+         
+      #    num = len(list1)
+         
+      #    cnt1 = 0
+      #    cnt2 = 0
+            
+      #       for i in range(num, num-5) :
+               
+      #          if list1[i] > 10 : # 온도 체크 로직 
+                  
+      #             cnt1 += 1
+                  
+      #       for i in range(num, num-5) :
+               
+      #          if list1[i] < 0 :   # 온도 체크 로직 
+                  
+      #             cnt2 += 1
+            
+      #       #더울 때      
+      #       if cnt1 == 5 :
+               
+      #          print
+      
+      #       #추울 때      
+      #       if cnt2 == 5 :
+               
+      #          print
+         
+      #    if(temp > 20)
+           
+      #    else if (temp < 20)
+         
+         
+         
+      
+      
+      # list1.append(num)
+      
+      
+      
+      
+      
+      
+      
+      # if len(list1) > 5 :
+         
+      #    for i in list1  :
+         
+      #       cnt = 0
+         
+      #       if i > 10 :
+            
+      #          cnt += 1
+            
+      #       if cnt >5 :
+            
+      #          print
          
       data =  {
          "version": "2.0",
@@ -120,14 +198,16 @@ class NuguApi(Resource):
          "output": {
              # backend parameter
          "location" : location,  # utterance parameter 1 
-         "message": response_body['items'][random.randrange(1,5)]['title']},   # utterance parameter 2
+         "message":
+            "테스트중"
+            # response_body['items'][random.randrange(1,5)]['title']
+         },   # utterance parameter 2
             "directives": []
               }
       
       # 실제 데이터 응답 
       return jsonify(data);
    
-
 
 
   
