@@ -96,7 +96,7 @@ class NuguApi(Resource):
    
    def post(self):
       
-      # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱
+      #장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱
       global todo2;
       todo2 = request2.json;
       location = todo2.get("action").get("parameters").get("location").get("value");
@@ -104,12 +104,48 @@ class NuguApi(Resource):
       # 실시간으로 공공데이터 기상 api에서 기온 정보를 받아옴
       tz = pytz.timezone('Asia/Seoul')
       cur_time = datetime.now(tz);
+      today02am = cur_time.replace(hour=2, minute=0);
+      today05am = cur_time.replace(hour=5, minute=0);
+      today08am = cur_time.replace(hour=8, minute=0);
+      today11am = cur_time.replace(hour=11, minute=0);
+      today14pm = cur_time.replace(hour=14, minute=0);
+      today17pm = cur_time.replace(hour=17, minute=0);
+      today20pm = cur_time.replace(hour=20, minute=0);
+      today23pm = cur_time.replace(hour=23, minute=0);
+      
+      
+      if cur_time >= today02am and cur_time < today05am : 
+         cur_time = today02am;
+      
+      if cur_time >= today05am and cur_time < today08am : 
+         cur_time = today05am;
+      
+      if cur_time >= today08am and cur_time < today11am : 
+         cur_time = today08am;
+      
+      if cur_time >= today11am and cur_time < today14pm : 
+         cur_time = today11am;
+      
+      if cur_time >= today14pm and cur_time < today17pm : 
+         cur_time = today14pm;
+         
+      if cur_time >= today17pm and cur_time < today20pm : 
+         cur_time = today17pm;
+         
+      if cur_time >= today20pm and cur_time < today23pm : 
+         cur_time = today20pm;
+         
+      if cur_time >= today23pm or cur_time < today02am :
+         cur_time = today23pm;
+         print(cur_time);
+   
       simple_cur_time = cur_time.strftime("%H%M");
-      print(simple_cur_time);
+      simple_cur_date = cur_time.strftime("%Y%m%d");
+      print(simple_cur_date)
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
                'pageNo' : '1', 'numOfRows' : '1',
-               'dataType' : 'JSON', 'base_date' : '20211128',
+               'dataType' : 'JSON', 'base_date' : simple_cur_date,
                'base_time' :  simple_cur_time, 'nx' : '59', 'ny' : '126' }
       response = requests.get(url, params=params).json();
       print(response);
