@@ -119,7 +119,7 @@ class NuguApi(Resource):
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' : '1700', 'nx' : '59', 'ny' : '126' }
       response = requests.get(url, params=params).json()
-      response2 = response['response']['body']['items'][0]['fcstValue'];
+      response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
          
       # # nugu speaker로 다시 전송할 데이터 
