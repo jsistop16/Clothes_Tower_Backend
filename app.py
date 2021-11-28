@@ -112,6 +112,7 @@ class NuguApi(Resource):
                'dataType' : 'JSON', 'base_date' : '20211128',
                'base_time' :  simple_cur_time, 'nx' : '59', 'ny' : '126' }
       response = requests.get(url, params=params).json();
+      print(response);
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
    
