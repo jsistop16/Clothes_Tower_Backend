@@ -156,7 +156,7 @@ class NuguApi(Resource):
       
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
-      if(response2 <= 10):
+      if(int(response2) <= 10):
          answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다. 긴 옷을 추천드립니다. 스마트 클로젯을 실행할까요?"
          
       answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다."
