@@ -15,8 +15,7 @@ from flask_sqlalchemy import SQLAlchemy
 # =============== basic setting ===================
 
 
-global responseList;
-responseList = [];
+
 global list1
 list1 = [];
 
@@ -91,12 +90,7 @@ class DeleteClothes(Resource):
 
 # ======================= nugu ===========================
 
-def getWeather(weather):
-   url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-   params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' :  weather, 'nx' : '59', 'ny' : '126' }
-   response = requests.get(url, params=params).json()
-   response2 = response['response']['body']['items']['item'][0]['fcstValue'];
-   responseList = response2;
+
 
    
 
@@ -112,16 +106,21 @@ class NuguApi(Resource):
    def post(self):
       global todo2;
       todo2 = request2.json;
-      
+      current_time = datetime.now().time()
+      print(current_time);
       # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱 
       location = todo2.get("action").get("parameters").get("location").get("value");
+      url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
+      params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' :  weather, 'nx' : '59', 'ny' : '126' }
+      response = requests.get(url, params=params).json()
+      response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
    
          # 기상예보 서비스 
      
       
-      answer = "오늘 " + location + " 의 날씨는 " + responseList + "도 입니다."
-      list1.append(responseList);
+      answer = "오늘 " + location + " 의 날씨는 " + response2 + "도 입니다."
+      list1.append(response2);
       if(len(list1) > 3):
          answer = "계절이 바뀌나봐요! 옷을 정리해드릴까요?"
          
@@ -210,9 +209,7 @@ class NuguApi(Resource):
 
   
 if __name__ == "__main__":
-    schedule.every().day.at("18:32").do(getWeather("1700"))
+   
     db.create_all();
     app.run(host='0.0.0.0', debug=False);
-    while True:
-      schedule.run_pending()
-      time.sleep(1);
+   
