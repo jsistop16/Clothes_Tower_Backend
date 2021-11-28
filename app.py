@@ -209,6 +209,6 @@ class NuguApi(Resource):
 
   
 if __name__ == "__main__":
-    schedule.every().day.at("17:00").do(getWeather("1700"))
+    schedule.every().day.at("18:28").do(getWeather("1700"))
     db.create_all();
     app.run(host='0.0.0.0', debug=False);
