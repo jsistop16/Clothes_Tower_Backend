@@ -157,7 +157,7 @@ class NuguApi(Resource):
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
    
-      answer = "오늘 " + location + " 의 날씨는 " + response2 + "도 입니다."
+      answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다."
       list1.append(response2);
       
       if(len(list1) > 3):
@@ -171,7 +171,7 @@ class NuguApi(Resource):
          "resultCode": "OK",
          "output": {
              # backend parameter
-         "location" : location,  # utterance parameter 1 
+         "location" : "location",  # utterance parameter 1 
          "message":  answer
             
          },   # utterance parameter 2
