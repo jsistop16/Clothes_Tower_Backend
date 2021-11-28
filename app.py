@@ -200,20 +200,20 @@ class NuguArrangement(Resource):
              else:
                 cnt2 += 1
          
-       if cnt1 >= 4 :
-          answer = "겨울이 다가왔습니다. 어느 계절 옷을 정리하시겠습니까?"
-       else:
-          answer = "환절기입니다. 여러 종류의 옷을 구비해 두시는게 좋을 것 같네요. 그래도 옷장을 정리하시겠습니까?"
-       data =  {
-         "version": "2.0",
-         "resultCode": "OK",
-         "output": {
+          if cnt1 >= 4:
+            answer = "겨울이 다가왔습니다. 어느 계절 옷을 정리하시겠습니까?"
+          else:
+            answer = "환절기입니다. 여러 종류의 옷을 구비해 두시는게 좋을 것 같네요. 그래도 옷장을 정리하시겠습니까?"
+          data =  {
+           "version": "2.0",
+           "resultCode": "OK",
+            "output": {
              # backend parameter
-         "location" : "location",  # utterance parameter 1 
-         "message":  answer
+            "location" : "location",  # utterance parameter 1 
+            "message":  answer
             
-         },   # utterance parameter 2
-            "directives": []
+            },   # utterance parameter 2
+             "directives": []
               }
 
 if __name__ == "__main__":
