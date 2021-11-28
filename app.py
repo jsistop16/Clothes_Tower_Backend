@@ -111,7 +111,7 @@ class NuguApi(Resource):
       # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱 
       location = todo2.get("action").get("parameters").get("location").get("value");
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-      params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' :  weather, 'nx' : '59', 'ny' : '126' }
+      params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' :  "1700", 'nx' : '59', 'ny' : '126' }
       response = requests.get(url, params=params).json()
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
