@@ -83,6 +83,9 @@ class DeleteClothes(Resource):
       db.session.remove();
       return "delete success";
 
+global list
+list1 = [];
+
 
 # NUGU와 관련된 API 
 @api.route("/answer-weather")
@@ -96,31 +99,15 @@ class NuguApi(Resource):
       # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱 
       location = todo2.get("action").get("parameters").get("location").get("value");
       
-      
-      # open api 호출 코드 
-      # client_id = os.environ.get("YOUR_CLIENT_ID")
-      # client_secret = os.environ.get("YOUR_CLIENT_SECRET") 
-      # encText = urllib.parse.quote(location);
-      # url = "https://openapi.naver.com/v1/search/local?query="+encText+"&display=5" # json 결과
-      # request = urllib.request.Request(url)
-      # request.add_header("X-Naver-Client-Id",client_id)
-      # request.add_header("X-Naver-Client-Secret",client_secret)
-      # response = urllib.request.urlopen(request)
-      # rescode = response.getcode()
-      # if(rescode==200):
-      #    response_body = json.loads(response.read())
-      #    print(response_body['items'][random.randrange(1,5)]['title']);
-      # else:
-      #    print("Error Code:" + rescode)
-         
-         
-         
+   
          # 기상예보 서비스 
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' : '1700', 'nx' : '59', 'ny' : '126' }
       response = requests.get(url, params=params).json()
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
-      
+      list1.append(response2);
+      if(len(list1) > 3):
+         response2 = "계절이 바뀌나봐요!"
          
       # # nugu speaker로 다시 전송할 데이터 
       
