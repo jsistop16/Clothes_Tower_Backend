@@ -105,9 +105,10 @@ class NuguApi(Resource):
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' : '1700', 'nx' : '59', 'ny' : '126' }
       response = requests.get(url, params=params).json()
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
+      answer = "오늘 " + location + " 의 날씨는 " + response2 + "도 입니다."
       list1.append(response2);
       if(len(list1) > 3):
-         response2 = "계절이 바뀌나봐요!"
+         answer = "계절이 바뀌나봐요! 옷을 정리해드릴까요?"
          
       # # nugu speaker로 다시 전송할 데이터 
       
@@ -173,15 +174,15 @@ class NuguApi(Resource):
       #       if cnt >5 :
             
       #          print
-         
+       
       data =  {
          "version": "2.0",
          "resultCode": "OK",
          "output": {
              # backend parameter
          "location" : location,  # utterance parameter 1 
-         "message":
-            response2
+         "message":  answer
+            
          },   # utterance parameter 2
             "directives": []
               }
