@@ -213,7 +213,10 @@ class NuguArrangement(Resource):
             },   # utterance parameter 2
              "directives": []
               }
-
+          return jsonify(data);
+       
+       
+       
 if __name__ == "__main__":
    
     db.create_all();
