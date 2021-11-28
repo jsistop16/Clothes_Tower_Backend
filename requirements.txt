@@ -6,3 +6,67 @@ mysqlclient
 mysql-connector-python
 flask_restx
 pymysql
+# # nugu speaker로 다시 전송할 데이터 
+      
+      # weather
+      
+      # list1.append(weather)
+      
+      # if len(list1)%5 == 0:
+         
+      #    num = len(list1)
+         
+      #    cnt1 = 0
+      #    cnt2 = 0
+            
+      #       for i in range(num, num-5) :
+               
+      #          if list1[i] > 10 : # 온도 체크 로직 
+                  
+      #             cnt1 += 1
+                  
+      #       for i in range(num, num-5) :
+               
+      #          if list1[i] < 0 :   # 온도 체크 로직 
+                  
+      #             cnt2 += 1
+            
+      #       #더울 때      
+      #       if cnt1 == 5 :
+               
+      #          print
+      
+      #       #추울 때      
+      #       if cnt2 == 5 :
+               
+      #          print
+         
+      #    if(temp > 20)
+           
+      #    else if (temp < 20)
+         
+         
+         
+      
+      
+      # list1.append(num)
+      
+      
+      
+      
+      
+      
+      
+      # if len(list1) > 5 :
+         
+      #    for i in list1  :
+         
+      #       cnt = 0
+         
+      #       if i > 10 :
+            
+      #          cnt += 1
+            
+      #       if cnt >5 :
+            
+      #          print

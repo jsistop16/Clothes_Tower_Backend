@@ -2,7 +2,6 @@ import os
 import sys
 import time
 import pytz
-# import urllib.request
 import schedule
 import requests 
 import random
@@ -15,9 +14,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # =============== basic setting ===================
 
-
-
-global list1
+global list1  
 list1 = [];
 
 #============== App 세팅하는 과정 =================
@@ -89,110 +86,44 @@ class DeleteClothes(Resource):
       return "delete success";
 
 
-# ======================= nugu ===========================
 
+# =================== NUGU와 관련된 API ========================
 
-
-   
-
-
-
-
-
-# NUGU와 관련된 API 
 @api.route("/answer-weather")
 class NuguApi(Resource):
    
    # NUGU에게 적절한 응답을 내려주는 과정 
+   
    def post(self):
+      
+      # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱
       global todo2;
       todo2 = request2.json;
+      location = todo2.get("action").get("parameters").get("location").get("value");
+         
+      # 실시간으로 공공데이터 기상 api에서 기온 정보를 받아옴
       tz = pytz.timezone('Asia/Seoul')
       cur_time = datetime.now(tz);
       simple_cur_time = cur_time.strftime("%H:%M");
       print(simple_cur_time);
-      
-      # 장소에 대한 parameter를 nugu 스피커에서 post 요청으로 받아온 후 파싱 
-      location = todo2.get("action").get("parameters").get("location").get("value");
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-      params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' :  "1700", 'nx' : '59', 'ny' : '126' }
-      response = requests.get(url, params=params).json()
+      params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
+               'pageNo' : '1', 'numOfRows' : '1',
+               'dataType' : 'JSON', 'base_date' : '20211128',
+               'base_time' :  simple_cur_time, 'nx' : '59', 'ny' : '126' }
+      response = requests.get(url, params=params).json();
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
    
-         # 기상예보 서비스 
-     
-      
       answer = "오늘 " + location + " 의 날씨는 " + response2 + "도 입니다."
       list1.append(response2);
+      
       if(len(list1) > 3):
          answer = "계절이 바뀌나봐요! 옷을 정리해드릴까요?"
          
-      # # nugu speaker로 다시 전송할 데이터 
-      
-      # weather
-      
-      # list1.append(weather)
-      
-      # if len(list1)%5 == 0:
-         
-      #    num = len(list1)
-         
-      #    cnt1 = 0
-      #    cnt2 = 0
-            
-      #       for i in range(num, num-5) :
-               
-      #          if list1[i] > 10 : # 온도 체크 로직 
-                  
-      #             cnt1 += 1
-                  
-      #       for i in range(num, num-5) :
-               
-      #          if list1[i] < 0 :   # 온도 체크 로직 
-                  
-      #             cnt2 += 1
-            
-      #       #더울 때      
-      #       if cnt1 == 5 :
-               
-      #          print
-      
-      #       #추울 때      
-      #       if cnt2 == 5 :
-               
-      #          print
-         
-      #    if(temp > 20)
-           
-      #    else if (temp < 20)
-         
-         
-         
       
       
-      # list1.append(num)
-      
-      
-      
-      
-      
-      
-      
-      # if len(list1) > 5 :
-         
-      #    for i in list1  :
-         
-      #       cnt = 0
-         
-      #       if i > 10 :
-            
-      #          cnt += 1
-            
-      #       if cnt >5 :
-            
-      #          print
-       
+      # 응답을 내려주는 json 데이터 
       data =  {
          "version": "2.0",
          "resultCode": "OK",
@@ -210,8 +141,6 @@ class NuguApi(Resource):
    
 
 
-
-  
 if __name__ == "__main__":
    
     db.create_all();
