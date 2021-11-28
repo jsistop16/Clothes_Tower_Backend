@@ -150,7 +150,7 @@ class NuguApi(Resource):
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
                'pageNo' : '1', 'numOfRows' : '1',
                'dataType' : 'JSON', 'base_date' : base_date,
-               'base_time' :  base_time, 'nx' : '61', 'ny' : '134' }
+               'base_time' :  base_time, 'nx' : '61', 'ny' : '127' }
       response = requests.get(url, params=params).json();
       
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
@@ -182,7 +182,10 @@ class NuguApi(Resource):
       
       # 실제 데이터 응답 
       return jsonify(data);
-   
+
+
+
+# 옷을 정리하는 로직    
 @api.route("/answer-arrangement")
 class NuguArrangement(Resource):
     def post(self):
@@ -192,8 +195,9 @@ class NuguArrangement(Resource):
           cnt1 = 0
           cnt2 = 0 
           
+          # 여기서 조금 더 세분화하면 사계절 구분 가능 
           for i in range(0,num):
-             if list1[i] < 12:
+             if list1[i] < 10:
                 print(list1[i]);
                 cnt1 += 1
              else:
