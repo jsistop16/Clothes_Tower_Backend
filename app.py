@@ -104,7 +104,7 @@ class NuguApi(Resource):
       # 실시간으로 공공데이터 기상 api에서 기온 정보를 받아옴
       tz = pytz.timezone('Asia/Seoul')
       cur_time = datetime.now(tz);
-      simple_cur_time = cur_time.strftime("%H:%M");
+      simple_cur_time = cur_time.strftime("%H%M");
       print(simple_cur_time);
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
