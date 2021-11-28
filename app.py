@@ -5,7 +5,7 @@ import pytz
 import schedule
 import requests 
 import random
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from flask import Flask, json, jsonify
 from flask import request as request2
 from flask_restx import Api, Resource
@@ -104,49 +104,54 @@ class NuguApi(Resource):
       # 실시간으로 공공데이터 기상 api에서 기온 정보를 받아옴
       tz = pytz.timezone('Asia/Seoul')
       cur_time = datetime.now(tz);
-      today02am = cur_time.replace(hour=2, minute=0);
-      today05am = cur_time.replace(hour=5, minute=0);
-      today08am = cur_time.replace(hour=8, minute=0);
-      today11am = cur_time.replace(hour=11, minute=0);
-      today14pm = cur_time.replace(hour=14, minute=0);
-      today17pm = cur_time.replace(hour=17, minute=0);
-      today20pm = cur_time.replace(hour=20, minute=0);
-      today23pm = cur_time.replace(hour=23, minute=0);
+    
+      now = datetime.now()  
+      # 오늘
+      today = datetime.today() # 현재 지역 날짜 반환
+      today_date = today.strftime("%Y%m%d") # 오늘의 날짜 (연도/월/일 반환)
+      print('오늘의 날짜는', today_date)
+
+      # 어제
+      yesterday = date.today() - timedelta(days=1)
+      yesterday_date=yesterday.strftime('%Y%m%d')
+      print('어제의 날짜는', yesterday_date)
+
+      # 1일 총 8번 데이터가 업데이트 된다.(0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300)
+      # 현재 api를 가져오려는 시점의 이전 시각에 업데이트된 데이터를 base_time, base_date로 설정
+      if now.hour<2 or (now.hour==2 and now.minute<=10): # 0시~2시 10분 사이
+        base_date=yesterday_date # 구하고자 하는 날짜가 어제의 날짜
+        base_time="2300"
+      elif now.hour<5 or (now.hour==5 and now.minute<=10): # 2시 11분~5시 10분 사이
+        base_date=today_date
+        base_time="0200"
+      elif now.hour<8 or (now.hour==8 and now.minute<=10): # 5시 11분~8시 10분 사이
+        base_date=today_date
+        base_time="0500"
+      elif now.hour<=11 or now.minute<=10: # 8시 11분~11시 10분 사이
+        base_date=today_date
+        base_time="0800"
+      elif now.hour<14 or (now.hour==14 and now.minute<=10): # 11시 11분~14시 10분 사이
+        base_date=today_date
+        base_time="1100"
+      elif now.hour<17 or (now.hour==17 and now.minute<=10): # 14시 11분~17시 10분 사이
+        base_date=today_date
+        base_time="1400"
+      elif now.hour<20 or (now.hour==20 and now.minute<=10): # 17시 11분~20시 10분 사이
+        base_date=today_date
+        base_time="1700" 
+      elif now.hour<23 or (now.hour==23 and now.minute<=10): # 20시 11분~23시 10분 사이
+        base_date=today_date
+        base_time="2000"
+      else: # 23시 11분~23시 59분
+        base_date=today_date
+        base_time="2300"
       
-      
-      if cur_time >= today02am and cur_time < today05am : 
-         cur_time = today02am;
-      
-      if cur_time >= today05am and cur_time < today08am : 
-         cur_time = today05am;
-      
-      if cur_time >= today08am and cur_time < today11am : 
-         cur_time = today08am;
-      
-      if cur_time >= today11am and cur_time < today14pm : 
-         cur_time = today11am;
-      
-      if cur_time >= today14pm and cur_time < today17pm : 
-         cur_time = today14pm;
-         
-      if cur_time >= today17pm and cur_time < today20pm : 
-         cur_time = today17pm;
-         
-      if cur_time >= today20pm and cur_time < today23pm : 
-         cur_time = today20pm;
-         
-      if cur_time >= today23pm or cur_time < today02am :
-         cur_time = today23pm;
-         print(cur_time);
-   
-      simple_cur_time = cur_time.strftime("%H%M");
-      simple_cur_date = cur_time.strftime("%Y%m%d");
-      print(simple_cur_date)
+
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
                'pageNo' : '1', 'numOfRows' : '1',
-               'dataType' : 'JSON', 'base_date' : simple_cur_date,
-               'base_time' :  simple_cur_time, 'nx' : '59', 'ny' : '126' }
+               'dataType' : 'JSON', 'base_date' : base_date,
+               'base_time' :  base_time, 'nx' : '59', 'ny' : '126' }
       response = requests.get(url, params=params).json();
       print(response);
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
@@ -181,5 +186,5 @@ class NuguApi(Resource):
 if __name__ == "__main__":
    
     db.create_all();
-    app.run(host='0.0.0.0', debug=False);
+    app.run(host='127.0.0.1', debug=False);
    

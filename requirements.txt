@@ -70,3 +70,40 @@ pymysql
       #       if cnt >5 :
             
       #          print
+
+
+
+  # today02am = cur_time.replace(hour=2, minute=0);
+      # today05am = cur_time.replace(hour=5, minute=0);
+      # today08am = cur_time.replace(hour=8, minute=0);w
+      # today11am = cur_time.replace(hour=11, minute=0);
+      # today14pm = cur_time.replace(hour=14, minute=0);
+      # today17pm = cur_time.replace(hour=17, minute=0);
+      # today20pm = cur_time.replace(hour=20, minute=0);
+      # today23pm = cur_time.replace(hour=23, minute=0);
+      
+      
+      # if cur_time >= today02am and cur_time < today05am : 
+      #    cur_time = today02am;
+      
+      # if cur_time >= today05am and cur_time < today08am : 
+      #    cur_time = today05am;
+      
+      # if cur_time >= today08am and cur_time < today11am : 
+      #    cur_time = today08am;
+      
+      # if cur_time >= today11am and cur_time < today14pm : 
+      #    cur_time = today11am;
+      
+      # if cur_time >= today14pm and cur_time < today17pm : 
+      #    cur_time = today14pm;
+         
+      # if cur_time >= today17pm and cur_time < today20pm : 
+      #    cur_time = today17pm;
+         
+      # if cur_time >= today20pm and cur_time < today23pm : 
+      #    cur_time = today20pm;
+         
+      # if cur_time >= today23pm or cur_time < today02am :
+      #    cur_time = today23pm;
+    #    print(cur_time);
