@@ -153,15 +153,17 @@ class NuguApi(Resource):
                'dataType' : 'JSON', 'base_date' : base_date,
                'base_time' :  base_time, 'nx' : '91', 'ny' : '76' }
       response = requests.get(url, params=params).json();
-      print(response);
+      
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
-   
+      if(response2 <= 10):
+         answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다. 긴 옷을 추천드립니다. 스마트 클로젯을 실행할까요?"
+         
       answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다."
       list1.append(response2);
       
-      if(len(list1) > 3):
-         answer = "계절이 바뀌나봐요! 옷을 정리해드릴까요?"
+      
+      
          
       
       
