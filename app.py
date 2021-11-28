@@ -117,7 +117,7 @@ class NuguApi(Resource):
          
          # 기상예보 서비스 
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-      params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' : '0600', 'nx' : '55', 'ny' : '127' }
+      params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1', 'dataType' : 'JSON', 'base_date' : '20211128', 'base_time' : '0500', 'nx' : '55', 'ny' : '127' }
       response = requests.get(url, params=params).json()
       print(response)
          
