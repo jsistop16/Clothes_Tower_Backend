@@ -1,6 +1,7 @@
 import os
 import sys
-import urllib.request 
+# import urllib.request
+import requests 
 import random
 from datetime import datetime
 from flask import Flask, json, jsonify
@@ -117,15 +118,8 @@ class NuguApi(Resource):
          # 기상예보 서비스 
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"), 'pageNo' : '1', 'numOfRows' : '1000', 'dataType' : 'XML', 'base_date' : '20210628', 'base_time' : '0600', 'nx' : '55', 'ny' : '127' }
-      request = urllib.request.Request(url,params)
-      response = urllib.request.urlopen(request)
-      rescode = response.getcode()
-      if(rescode==200):
-         response_body = json.loads(response.read())
-         # print(response_body['items'][random.randrange(1,5)]['title']);
-         print(response.content)
-      else:
-          print("Error Code:" + rescode)
+      response = requests.get(url, params=params)
+      print(response.content)
          
       # # nugu speaker로 다시 전송할 데이터 
       
@@ -208,6 +202,7 @@ class NuguApi(Resource):
       # 실제 데이터 응답 
       return jsonify(data);
    
+
 
 
   
