@@ -160,7 +160,7 @@ class NuguApi(Resource):
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
                'pageNo' : '1', 'numOfRows' : '1',
                'dataType' : 'JSON', 'base_date' : base_date,
-               'base_time' :  base_time, 'nx' : '61', 'ny' : '127' }
+               'base_time' :  base_time, 'nx' : '60', 'ny' : '127' }
       response = requests.get(url, params=params).json();
       
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
