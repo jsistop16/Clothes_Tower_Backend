@@ -135,7 +135,7 @@ class NuguApi(Resource):
       elif now.hour<8 or (now.hour==8 and now.minute<=10): # 5시 11분~8시 10분 사이
         base_date=today_date
         base_time="0500"
-      elif now.hour<=11 or now.minute<=10: # 8시 11분~11시 10분 사이
+      elif now.hour<=11 or (now.minute<=11 and now.minute<=10): # 8시 11분~11시 10분 사이
         base_date=today_date
         base_time="0800"
       elif now.hour<14 or (now.hour==14 and now.minute<=10): # 11시 11분~14시 10분 사이
