@@ -112,7 +112,7 @@ class NuguApi(Resource):
       cur_time = datetime.now(tz);
       
       now = datetime.now()
-      print("지금 시간은 " + now)  
+      print("지금 시간은 " + now.strftime("%H%M"));
       # 오늘
       today = datetime.today() # 현재 지역 날짜 반환
       today_date = today.strftime("%Y%m%d") # 오늘의 날짜 (연도/월/일 반환)
