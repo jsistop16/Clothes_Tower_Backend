@@ -120,7 +120,7 @@ class NuguApi(Resource):
       print('오늘의 날짜는', today_date)
 
       # 어제
-      yesterday = now.today(tz) - timedelta(days=1)
+      yesterday = now - timedelta(days=1)
       yesterday_date=yesterday.strftime('%Y%m%d')
       print('어제의 날짜는', yesterday_date)
 
