@@ -258,7 +258,7 @@ class Vision(Resource):
     
   def get(self):
     print("google vision api start...!")
-    result = run_vision("cloth.png");
+    result = run_vision("./image/cloth.png");
     return "success";
     
        
