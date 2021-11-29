@@ -1,6 +1,11 @@
 import os
-import sys
-import time
+import io
+import re
+from types import resolve_bases
+from google.cloud import vision
+from google.cloud.vision_v1 import AnnotateImageResponse
+from google.cloud.vision_v1.services.image_annotator import client
+from google.protobuf.json_format import MessageToJson
 import pytz
 import schedule
 import requests 
@@ -11,13 +16,15 @@ from flask import request as request2
 from flask_restx import Api, Resource
 from dataclasses import dataclass 
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.wrappers import response
 
 # =============== basic setting ===================
 
 global list1  
 list1 = [];
 
-#============== App 세팅하는 과정 =================
+
+#====================================== App 세팅하는 과정 =========================================
 
 app = Flask(__name__);
 # 환경변수를 사용해서 RDS HOST를 숨김 
@@ -28,7 +35,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False;
 #host.docker.internal 윈도우에서 테스트해볼때
 
 
-# =========== DB 세팅하는 과정 ==============
+# ======================================== DB 세팅하는 과정 =============================================
 
 db = SQLAlchemy(app);
 
@@ -52,7 +59,7 @@ class Cloth(db.Model):
 
 
 
-#============ REST API 세팅하는 과정 ================
+#==================================== REST API 세팅하는 과정 =============================================
 
 api = Api(app);
 @api.route("/cloth")
@@ -60,7 +67,7 @@ class GetAndPostClothes(Resource):
    
    def get(self):
     clothes = Cloth.query.all();
-    
+   
     # JSON화 해서 내보내야함
     return jsonify(clothes);
 
@@ -91,7 +98,7 @@ class DeleteClothes(Resource):
 
 
 
-# =================== NUGU와 관련된 API ========================
+# ==================================== NUGU와 관련된 API ==========================================
 
 @api.route("/answer-weather")
 class NuguApi(Resource):
@@ -219,11 +226,44 @@ class NuguArrangement(Resource):
              "directives": []
               }
           return jsonify(data);
-       
-       
+        
+        
+        
+# ================================== Google Image Vision을 통한 옷 이미지 인식 기능 =================================        
+        
+def rgb_to_hex(r, g, b):
+    r, g, b = int(r), int(g), int(b)
+    return '#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)
+def run_vision(file_name):
+  client = vision.ImageAnnotatorClient()
+  os.environ.get("GOOGLE_APPLICATION_CREDENTIALS");
+
+
+  with io.open(file_name, 'rb') as image_file: 
+    content = image_file.read()
+
+  image = vision.Image()
+  image.content = content;
+
+  response = client.image_properties(image = image)
+  
+  labels = response.image_properties_annotation;
+  
+  for color in labels.dominant_colors.colors:
+    print("color = " + rgb_to_hex(int(color.color.red),int(color.color.green),int(color.color.blue)) + " percentage : " +str(int(color.score * 100))+"%")
+   
+  return labels;        
+@api.route("/vision")
+class Vision(Resource):
+    
+  def get(self):
+    print("google vision api start...!")
+    result = run_vision("cloth.png");
+    return "success";
+    
        
 if __name__ == "__main__":
    
     db.create_all();
-    app.run(host='0.0.0.0', debug=False);
+    app.run(host='0.0.0.0', debug=True);
    

@@ -1,3 +1,5 @@
 .flaskenv
 docker-compose.yml
 Dockerfile
+ai-vision-333602-d8a9ee9ed3a6.json
+requirements.txt
