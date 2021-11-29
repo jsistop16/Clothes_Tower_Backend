@@ -10,7 +10,7 @@ import pytz
 import schedule
 import requests 
 import random
-from datetime import date, datetime, timedelta
+from datetime import  datetime, timedelta
 from flask import Flask, json, jsonify
 from flask import request as request2
 from flask_restx import Api, Resource
