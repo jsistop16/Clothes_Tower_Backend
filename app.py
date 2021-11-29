@@ -2,10 +2,10 @@ import os
 import io
 
 
-from google.cloud import vision
-from google.cloud.vision_v1 import AnnotateImageResponse
-from google.cloud.vision_v1.services.image_annotator import client
-from google.protobuf.json_format import MessageToJson
+# from google.cloud import vision
+# from google.cloud.vision_v1 import AnnotateImageResponse
+# from google.cloud.vision_v1.services.image_annotator import client
+# from google.protobuf.json_format import MessageToJson
 import pytz
 import schedule
 import requests 
@@ -240,35 +240,35 @@ class NuguArrangement(Resource):
         
 # ================================== Google Image Vision을 통한 옷 이미지 인식 기능 =================================        
         
-def rgb_to_hex(r, g, b):
-    r, g, b = int(r), int(g), int(b)
-    return '#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)
-def run_vision(file_name):
-  client = vision.ImageAnnotatorClient()
-  os.environ.get("GOOGLE_APPLICATION_CREDENTIALS");
+# def rgb_to_hex(r, g, b):
+#     r, g, b = int(r), int(g), int(b)
+#     return '#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)
+# def run_vision(file_name):
+#   client = vision.ImageAnnotatorClient()
+#   os.environ.get("GOOGLE_APPLICATION_CREDENTIALS");
 
 
-  with io.open(file_name, 'rb') as image_file: 
-    content = image_file.read()
+#   with io.open(file_name, 'rb') as image_file: 
+#     content = image_file.read()
 
-  image = vision.Image()
-  image.content = content;
+#   image = vision.Image()
+#   image.content = content;
 
-  response = client.image_properties(image = image)
+#   response = client.image_properties(image = image)
   
-  labels = response.image_properties_annotation;
-  print(labels)
-  for color in labels.dominant_colors.colors:
-    print("color = " + rgb_to_hex(int(color.color.red),int(color.color.green),int(color.color.blue)) + " percentage : " +str(int(color.score * 100))+"%")
+#   labels = response.image_properties_annotation;
+#   print(labels)
+#   for color in labels.dominant_colors.colors:
+#     print("color = " + rgb_to_hex(int(color.color.red),int(color.color.green),int(color.color.blue)) + " percentage : " +str(int(color.score * 100))+"%")
    
-  return labels;        
-@api.route("/vision")
-class Vision(Resource):
+#   return labels;        
+# @api.route("/vision")
+# class Vision(Resource):
     
-  def get(self):
-    print("google vision api start...!")
-    result = run_vision("./image/cloth.png");
-    return "success";
+#   def get(self):
+#     print("google vision api start...!")
+#     result = run_vision("./image/cloth.png");
+#     return "success";
 
 
 
