@@ -211,7 +211,7 @@ class NuguArrangement(Resource):
           
           # 여기서 조금 더 세분화하면 사계절 구분 가능 
           for i in range(0,num):
-             if list1[i] < 10:
+             if list1[i] < 5:
                 print(list1[i]);
                 cnt1 += 1
              else:
