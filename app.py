@@ -2,10 +2,10 @@ import os
 import io
 import re
 
-# from google.cloud import vision
-# from google.cloud.vision_v1 import AnnotateImageResponse
-# from google.cloud.vision_v1.services.image_annotator import client
-# from google.protobuf.json_format import MessageToJson
+from google.cloud import vision
+from google.cloud.vision_v1 import AnnotateImageResponse
+from google.cloud.vision_v1.services.image_annotator import client
+from google.protobuf.json_format import MessageToJson
 import pytz
 import schedule
 import requests 
@@ -115,12 +115,12 @@ class NuguApi(Resource):
       print(now.hour);
       print("지금 시간은 " + now.strftime("%H%M"));
       # 오늘
-      today = datetime.today() # 현재 지역 날짜 반환
+      today = datetime.today(tz) # 현재 지역 날짜 반환
       today_date = today.strftime("%Y%m%d") # 오늘의 날짜 (연도/월/일 반환)
       print('오늘의 날짜는', today_date)
 
       # 어제
-      yesterday = date.today() - timedelta(days=1)
+      yesterday = datetime.today(tz) - timedelta(days=1)
       yesterday_date=yesterday.strftime('%Y%m%d')
       print('어제의 날짜는', yesterday_date)
 
@@ -240,39 +240,67 @@ class NuguArrangement(Resource):
         
 # ================================== Google Image Vision을 통한 옷 이미지 인식 기능 =================================        
         
-# def rgb_to_hex(r, g, b):
-#     r, g, b = int(r), int(g), int(b)
-#     return '#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)
-# def run_vision(file_name):
-#   client = vision.ImageAnnotatorClient()
-#   os.environ.get("GOOGLE_APPLICATION_CREDENTIALS");
+def rgb_to_hex(r, g, b):
+    r, g, b = int(r), int(g), int(b)
+    return '#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)
+def run_vision(file_name):
+  client = vision.ImageAnnotatorClient()
+  os.environ.get("GOOGLE_APPLICATION_CREDENTIALS");
 
 
-#   with io.open(file_name, 'rb') as image_file: 
-#     content = image_file.read()
+  with io.open(file_name, 'rb') as image_file: 
+    content = image_file.read()
 
-#   image = vision.Image()
-#   image.content = content;
+  image = vision.Image()
+  image.content = content;
 
-#   response = client.image_properties(image = image)
+  response = client.image_properties(image = image)
   
-#   labels = response.image_properties_annotation;
-  
-#   for color in labels.dominant_colors.colors:
-#     print("color = " + rgb_to_hex(int(color.color.red),int(color.color.green),int(color.color.blue)) + " percentage : " +str(int(color.score * 100))+"%")
+  labels = response.image_properties_annotation;
+  print(labels)
+  for color in labels.dominant_colors.colors:
+    print("color = " + rgb_to_hex(int(color.color.red),int(color.color.green),int(color.color.blue)) + " percentage : " +str(int(color.score * 100))+"%")
    
-#   return labels;        
-# @api.route("/vision")
-# class Vision(Resource):
+  return labels;        
+@api.route("/vision")
+class Vision(Resource):
     
-#   def get(self):
-#     print("google vision api start...!")
-#     result = run_vision("./image/cloth.png");
-#     return "success";
-    
-       
+  def get(self):
+    print("google vision api start...!")
+    result = run_vision("./image/cloth.png");
+    return "success";
+
+
+
+# =======================================================
+
+# def closest_colour(requested_colour):
+#     min_colours = {}
+#     for key, name in webcolors.css3_hex_to_names.items():
+#         r_c, g_c, b_c = webcolors.hex_to_rgb(key)
+#         rd = (r_c - requested_colour[0]) ** 2
+#         gd = (g_c - requested_colour[1]) ** 2
+#         bd = (b_c - requested_colour[2]) ** 2
+#         min_colours[(rd + gd + bd)] = name
+#     return min_colours[min(min_colours.keys())]
+
+# def get_colour_name(requested_colour):
+#     try:
+#         closest_name = actual_name = webcolors.rgb_to_name(requested_colour)
+#     except ValueError:
+#         closest_name = closest_colour(requested_colour)
+#         actual_name = None
+#     return actual_name, closest_name
+
+# requested_colour = (119, 172, 152)
+# actual_name, closest_name = get_colour_name(requested_colour)
+
+
+# 
+# print "Actual colour name:", actual_name, ", closest colour name:", closest_name    
+#==================================================================       
 if __name__ == "__main__":
    
     db.create_all();
-    app.run(host='0.0.0.0', debug=True);
+    app.run(host='127.0.0.1', debug=True);
    
