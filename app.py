@@ -152,6 +152,7 @@ class NuguApi(Resource):
         base_date=today_date
         base_time="2300"
       
+      print("현재 시각 : " +base_time);
       # 실제로 공공데이터 api에서 데이터를 가지고 오는 로직 
       url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
       params ={'serviceKey' : os.environ.get("WEATHER_KEY"),
@@ -163,9 +164,13 @@ class NuguApi(Resource):
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
       if(int(response2) <= 10):
-         answer = "현재 시각, 오늘의 날씨는 "+ response2 + "도 입니다. 긴 옷을 추천드립니다. 스마트 클로젯을 실행할까요?"   
+         answer = "현재 시각, 기온는 "+ response2 + "도 입니다. 긴 옷을 추천드립니다. 스마트 클로젯을 실행할까요?"
+      elif(int(response2) > 10 and int(response2) <= 20):
+         answer =  "현재 시각, 기온는 "+ response2 + "도 입니다. 환절기이니 외투를 챙기세요. 스마트 클로젯을 실행할까요?"
+      elif(int(response2) > 20):
+         answer =  "현재 시각, 기온는 "+ response2 + "도 입니다. 시원한 옷을 추천드립니다. 스마트 클로젯을 실행할까요?" 
       else:
-        answer = "현재 시각, 오늘의 날씨는 " + response2 + "도 입니다."
+        answer = "현재 시각, 기온는 " + response2 + "도 입니다."
         
       list1.append(int(response2));
       
@@ -211,7 +216,9 @@ class NuguArrangement(Resource):
                 cnt2 += 1
          
           if cnt1 >= num-1:
-            answer = "겨울이 다가왔습니다. 어느 계절 옷을 정리하시겠습니까?"
+            answer = "겨울"
+          elif cnt2 >= num-1:
+            answer = "여름"
           else:
             answer = "환절기입니다. 여러 종류의 옷을 구비해 두시는게 좋을 것 같네요. 그래도 옷장을 정리하시겠습니까?"
           data =  {
