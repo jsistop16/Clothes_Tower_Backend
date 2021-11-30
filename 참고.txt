@@ -105,3 +105,66 @@
       # global todo2;
       # todo2 = request2.json;
       # location = todo2.get("action").get("parameters").get("location").get("value");
+
+
+      # ================================== Google Image Vision을 통한 옷 이미지 인식 기능 =================================        
+        
+# def rgb_to_hex(r, g, b):
+#     r, g, b = int(r), int(g), int(b)
+#     return '#' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)
+# def run_vision(file_name):
+#   client = vision.ImageAnnotatorClient()
+#   os.environ.get("GOOGLE_APPLICATION_CREDENTIALS");
+
+
+#   with io.open(file_name, 'rb') as image_file: 
+#     content = image_file.read()
+
+#   image = vision.Image()
+#   image.content = content;
+
+#   response = client.image_properties(image = image)
+  
+#   labels = response.image_properties_annotation;
+#   print(labels)
+#   for color in labels.dominant_colors.colors:
+#     print("color = " + rgb_to_hex(int(color.color.red),int(color.color.green),int(color.color.blue)) + " percentage : " +str(int(color.score * 100))+"%")
+   
+#   return labels;        
+# @api.route("/vision")
+# class Vision(Resource):
+    
+#   def get(self):
+#     print("google vision api start...!")
+#     result = run_vision("./image/cloth.png");
+#     return "success";
+
+
+
+# =======================================================
+
+# def closest_colour(requested_colour):
+#     min_colours = {}
+#     for key, name in webcolors.css3_hex_to_names.items():
+#         r_c, g_c, b_c = webcolors.hex_to_rgb(key)
+#         rd = (r_c - requested_colour[0]) ** 2
+#         gd = (g_c - requested_colour[1]) ** 2
+#         bd = (b_c - requested_colour[2]) ** 2
+#         min_colours[(rd + gd + bd)] = name
+#     return min_colours[min(min_colours.keys())]
+
+# def get_colour_name(requested_colour):
+#     try:
+#         closest_name = actual_name = webcolors.rgb_to_name(requested_colour)
+#     except ValueError:
+#         closest_name = closest_colour(requested_colour)
+#         actual_name = None
+#     return actual_name, closest_name
+
+# requested_colour = (119, 172, 152)
+# actual_name, closest_name = get_colour_name(requested_colour)
+
+
+# 
+# print "Actual colour name:", actual_name, ", closest colour name:", closest_name    
+#==================================================================       
