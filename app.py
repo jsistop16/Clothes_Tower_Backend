@@ -8,19 +8,9 @@ from flask_restx import Api
 from flask import Flask
 from flask import request
 from Back.back import Clothes
-
-# from flask_sqlalchemy import SQLAlchemy
-
 from DB.models import Cloth , db
 from Nugu.nuguRoute import NuguSpeacker
 
-
-
-
-
-
-
-#============== App 세팅하는 과정 ===============
 
 app = Flask(__name__);
 # 환경변수를 사용해서 RDS HOST를 숨김 
@@ -29,18 +19,11 @@ app.config['SQLALCHEMY_ECHO'] = True;
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False;
 db.init_app(app);
 
-#============ REST API 세팅하는 과정 ===============
+#===== REST API 세팅하는 과정 =======
 
 api = Api(app);
-api.add_namespace(Clothes, '/clothes')  
-api.add_namespace(NuguSpeacker, '/nugu')
-
-# ============= NUGU와 관련된 API ================
-
-
-
-
-        
+api.add_namespace(Clothes, '/clothes')      # backend 
+api.add_namespace(NuguSpeacker, '/nugu')    # nugu speaker
 
 if __name__ == "__main__":
     
