@@ -7,8 +7,8 @@ import io
 from flask_restx import Api, Resource
 from flask import Flask, json, jsonify
 from flask import request
-from answerWeather import answerWeather
-from answerArrangement import answerArrangement
+from nugu.answerWeather import answerWeather
+from nugu.answerArrangement import answerArrangement
 from dataclasses import dataclass 
 from flask_sqlalchemy import SQLAlchemy
 from clothes import Clothes
