@@ -11,8 +11,8 @@ from nugu.answerWeather import answerWeather
 from nugu.answerArrangement import answerArrangement
 from dataclasses import dataclass 
 from flask_sqlalchemy import SQLAlchemy
-from clothes import Clothes
-from models import Cloth , db
+
+from DB.models import Cloth , db
 
 
 
@@ -120,5 +120,5 @@ class NuguArrangement(Resource):
 if __name__ == "__main__":
     
     db.create_all();
-    app.run(host='0.0.0.0', debug=False);
+    app.run(host='127.0.0.1', debug=False);
    
