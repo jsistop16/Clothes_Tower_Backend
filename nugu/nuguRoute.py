@@ -1,7 +1,7 @@
 from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 # from .answerWeather import answerWeather
-from .answerArrangement import answerArrangement
+# from .answerArrangement import answerArrangement
 from DB.models import Cloth
 
 NuguSpeaker = Namespace("NuguSpeaker")
@@ -42,19 +42,19 @@ class NuguApi(Resource):
 class NuguArrangement(Resource):
     def post(self):
           
-          answer = answerArrangement(list1);
+         #  answer = answerArrangement(list1);
           
-          data =  {
-           "version": "2.0",
-           "resultCode": "OK",
-            "output": {
-            "location" : "location",  
-            "message2":  answer
-            },   
-             "directives": []
-              }
-          return jsonify(data);
-        
+         #  data =  {
+         #   "version": "2.0",
+         #   "resultCode": "OK",
+         #    "output": {
+         #    "location" : "location",  
+         #    "message2":  answer
+         #    },   
+         #     "directives": []
+         #      }
+         #  return jsonify(data);
+        return "success"
         
 # @NuguSpeaker.route("/answer-color")
 # class NuguAnswerColor(Resource):
