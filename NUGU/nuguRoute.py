@@ -61,12 +61,12 @@ class NuguAnswerColor(Resource):
        
        result = request.json;
        
-       print(result);
+       
        color = result.get("action").get("parameters").get("color").get("value");
        findClothes = Cloth.query.filter(Cloth.color == color).all();
-       print(findClothes);
+       
        countClothes = len(findClothes);
-       print("빨강색 옷 ",countClothes,"벌 조회했습니다");
+      
        data =  {
           "version": "2.0",
           "resultCode": "OK",
