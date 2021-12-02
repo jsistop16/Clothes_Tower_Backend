@@ -62,6 +62,6 @@ class NuguAnswerColor(Resource):
        print(result);
        color = result.get("action").get("parameters").get("color").get("value");
        findClothes = Cloth.query.filter(Cloth.color == color).all();
-      #  print(findClothes);
-      #  return "success"
+       print(findClothes);
+       return "success"
   
