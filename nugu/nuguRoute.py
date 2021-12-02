@@ -2,6 +2,7 @@ from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 from Nugu.answerWeather import answerWeather
 from Nugu.answerArrangement import answerArrangement
+from DB.models import Cloth
 NuguSpeacker = Namespace('NuguSpeaker');
 global list1  
 list1 = [];
