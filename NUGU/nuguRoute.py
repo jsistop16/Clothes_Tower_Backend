@@ -24,7 +24,6 @@ class NuguApi(Resource):
          "version": "2.0",
          "resultCode": "OK",
          "output": {
-         "location" : "location",  
          "message":  response.get("answer")
 
          },   
