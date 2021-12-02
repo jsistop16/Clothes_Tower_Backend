@@ -2,7 +2,7 @@ from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 # from .answerWeather import answerWeather
 # from .answerArrangement import answerArrangement
-from DB.models import Cloth
+# from DB.models import Cloth
 
 NuguSpeaker = Namespace("NuguSpeaker")
 global list1  
