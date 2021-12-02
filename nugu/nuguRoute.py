@@ -3,11 +3,12 @@ from flask_restx import Resource, Namespace
 from Nugu.answerWeather import answerWeather
 from Nugu.answerArrangement import answerArrangement
 from DB.models import Cloth
-NuguSpeaker = Namespace('NuguSpeaker');
+
+Speaker = Namespace('Speaker');
 global list1  
 list1 = [];
 
-@NuguSpeaker.route("/answer-weather")
+@Speaker.route("/answer-weather")
 class NuguApi(Resource):
    
    # NUGU에게 적절한 응답을 내려주는 과정 
@@ -36,7 +37,7 @@ class NuguApi(Resource):
 
 
 # 옷을 정리하는 로직    
-@NuguSpeaker.route("/answer-arrangement")
+@Speaker.route("/answer-arrangement")
 class NuguArrangement(Resource):
     def post(self):
           
@@ -54,7 +55,7 @@ class NuguArrangement(Resource):
           return jsonify(data);
         
         
-@NuguSpeaker.route("/answer-color")
+@Speaker.route("/answer-color")
 class NuguAnswerColor(Resource):
     def post(self):
        
