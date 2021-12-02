@@ -6,7 +6,6 @@ import io
 # from google.protobuf.json_format import MessageToJson
 from flask_restx import Api
 from flask import Flask
-from flask import request
 from Back.back import Clothes
 from DB.models import Cloth , db
 from Nugu.nuguRoute import NuguSpeacker
@@ -28,5 +27,5 @@ api.add_namespace(NuguSpeacker, '/nugu')    # nugu speaker
 if __name__ == "__main__":
     
     db.create_all();
-    app.run(host='127.0.0.1', debug=True);
+    app.run(host='0.0.0.0', debug=False);
    
