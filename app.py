@@ -21,7 +21,7 @@ db.init_app(app);
 #===== REST API 세팅하는 과정 =======
 
 api = Api(app);
-api.add_namespace(NuguSpeaker, '/nuguSpeaker')
+api.add_namespace(NuguSpeaker, '/nugu')
 api.add_namespace(Clothes, '/clothes')      # backend 
     # nugu speaker
 
