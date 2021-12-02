@@ -34,23 +34,23 @@ class NuguApi(Resource):
 
 
 
-# # 옷을 정리하는 로직    
-# @NuguSpeacker.route("/answer-arrangement")
-# class NuguArrangement(Resource):
-#     def post(self):
+# 옷을 정리하는 로직    
+@NuguSpeacker.route("/answer-arrangement")
+class NuguArrangement(Resource):
+    def post(self):
           
-#           answer = answerArrangement(list1);
+          answer = answerArrangement(list1);
           
-#           data =  {
-#            "version": "2.0",
-#            "resultCode": "OK",
-#             "output": {
-#             "location" : "location",  
-#             "message2":  answer
-#             },   
-#              "directives": []
-#               }
-#           return jsonify(data);
+          data =  {
+           "version": "2.0",
+           "resultCode": "OK",
+            "output": {
+            "location" : "location",  
+            "message2":  answer
+            },   
+             "directives": []
+              }
+          return jsonify(data);
         
         
 # @NuguSpeacker.route("/answer-color")
