@@ -1,14 +1,14 @@
 from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 # from .answerWeather import answerWeather
-# from .answerArrangement import answerArrangement
+from .answerArrangement import answerArrangement
 from DB.models import Cloth
 
-Speaker = Namespace('Speaker');
+NuguSpeaker = Namespace("NuguSpeaker")
 global list1  
 list1 = [];
 
-@Speaker.route("/answer-weather")
+@NuguSpeaker.route("/answer-weather")
 class NuguApi(Resource):
    
    # NUGU에게 적절한 응답을 내려주는 과정 
@@ -33,29 +33,30 @@ class NuguApi(Resource):
       
       # # 실제 데이터 응답 
       # return jsonify(data);
+      return "success"
 
 
 
 # 옷을 정리하는 로직    
-@Speaker.route("/answer-arrangement")
+@NuguSpeaker.route("/answer-arrangement")
 class NuguArrangement(Resource):
     def post(self):
           
-         #  answer = answerArrangement(list1);
+          answer = answerArrangement(list1);
           
-         #  data =  {
-         #   "version": "2.0",
-         #   "resultCode": "OK",
-         #    "output": {
-         #    "location" : "location",  
-         #    "message2":  answer
-         #    },   
-         #     "directives": []
-         #      }
-         #  return jsonify(data);
+          data =  {
+           "version": "2.0",
+           "resultCode": "OK",
+            "output": {
+            "location" : "location",  
+            "message2":  answer
+            },   
+             "directives": []
+              }
+          return jsonify(data);
         
         
-# @Speaker.route("/answer-color")
+# @NuguSpeaker.route("/answer-color")
 # class NuguAnswerColor(Resource):
 #     def post(self):
        
