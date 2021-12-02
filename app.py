@@ -5,7 +5,7 @@ import os
 # from google.protobuf.json_format import MessageToJson
 from flask_restx import Api
 from flask import Flask
-from Back.back import Clothes
+# from Back.back import Clothes
 from DB.models import db
 from Nugu.nuguRoute import NuguSpeaker
 
@@ -21,7 +21,7 @@ db.init_app(app);
 
 api = Api(app);
 api.add_namespace(NuguSpeaker, '/nugu')
-api.add_namespace(Clothes, '/clothes')      # backend 
+# api.add_namespace(Clothes, '/clothes')      # backend 
     # nugu speaker
 
 if __name__ == "__main__":
