@@ -55,7 +55,7 @@ class NuguArrangement(Resource):
           return jsonify(data);
         
         
-@NuguSpeaker.route("/answer-color")
+@NuguSpeaker.route("/answer-showByColor")
 class NuguAnswerColor(Resource):
     def post(self):
        
