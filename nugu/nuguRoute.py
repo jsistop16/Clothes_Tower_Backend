@@ -1,56 +1,56 @@
-from flask import  jsonify
-from flask_restx import Resource, Namespace
-from Nugu.answerWeather import answerWeather
-from Nugu.answerArrangement import answerArrangement
-NuguSpeacker = Namespace('NuguSpeaker');
-global list1  
-list1 = [];
+# from flask import  jsonify
+# from flask_restx import Resource, Namespace
+# from Nugu.answerWeather import answerWeather
+# from Nugu.answerArrangement import answerArrangement
+# NuguSpeacker = Namespace('NuguSpeaker');
+# global list1  
+# list1 = [];
 
-@NuguSpeacker.route("/answer-weather")
-class NuguApi(Resource):
+# @NuguSpeacker.route("/answer-weather")
+# class NuguApi(Resource):
    
-   # NUGU에게 적절한 응답을 내려주는 과정 
+#    # NUGU에게 적절한 응답을 내려주는 과정 
    
-   def post(self):
+#    def post(self):
       
-      # Nugu에게서 기온을 받아오는 로직 
-      response =  answerWeather()
-      list1.append(int(response.get("response")));
+#       # Nugu에게서 기온을 받아오는 로직 
+#       response =  answerWeather()
+#       list1.append(int(response.get("response")));
 
-      # 응답을 내려주는 json 데이터 
-      data =  {
-         "version": "2.0",
-         "resultCode": "OK",
-         "output": {
-         "location" : "location",  
-         "message":  response.get("answer")
+#       # 응답을 내려주는 json 데이터 
+#       data =  {
+#          "version": "2.0",
+#          "resultCode": "OK",
+#          "output": {
+#          "location" : "location",  
+#          "message":  response.get("answer")
 
-         },   
-            "directives": []
-              }
+#          },   
+#             "directives": []
+#               }
       
-      # 실제 데이터 응답 
-      return jsonify(data);
+#       # 실제 데이터 응답 
+#       return jsonify(data);
 
 
 
-# 옷을 정리하는 로직    
-@NuguSpeacker.route("/answer-arrangement")
-class NuguArrangement(Resource):
-    def post(self):
+# # 옷을 정리하는 로직    
+# @NuguSpeacker.route("/answer-arrangement")
+# class NuguArrangement(Resource):
+#     def post(self):
           
-          answer = answerArrangement(list1);
+#           answer = answerArrangement(list1);
           
-          data =  {
-           "version": "2.0",
-           "resultCode": "OK",
-            "output": {
-            "location" : "location",  
-            "message2":  answer
-            },   
-             "directives": []
-              }
-          return jsonify(data);
+#           data =  {
+#            "version": "2.0",
+#            "resultCode": "OK",
+#             "output": {
+#             "location" : "location",  
+#             "message2":  answer
+#             },   
+#              "directives": []
+#               }
+#           return jsonify(data);
         
         
 # @NuguSpeacker.route("/answer-color")
