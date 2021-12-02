@@ -47,8 +47,8 @@ class NuguArrangement(Resource):
            "version": "2.0",
            "resultCode": "OK",
             "output": {
-            "location" : "location",  
-            "message2":  answer
+              
+            "season":  answer
             },   
              "directives": []
               }
