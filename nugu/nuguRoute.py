@@ -1,69 +1,69 @@
-from flask import  jsonify, request
+# from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 # from .answerWeather import answerWeather
 # from .answerArrangement import answerArrangement
 # from DB.models import Cloth
 
 NuguSpeaker = Namespace("NuguSpeaker")
-global list1  
-list1 = [];
+# global list1  
+# list1 = [];
 
-@NuguSpeaker.route("/answer-weather")
-class NuguApi(Resource):
+# @NuguSpeaker.route("/answer-weather")
+# class NuguApi(Resource):
    
-   # NUGU에게 적절한 응답을 내려주는 과정 
+#    # NUGU에게 적절한 응답을 내려주는 과정 
    
-   def post(self):
+#    def post(self):
       
-      # # Nugu에게서 기온을 받아오는 로직 
-      # response =  answerWeather()
-      # list1.append(int(response.get("response")));
+#       # # Nugu에게서 기온을 받아오는 로직 
+#       # response =  answerWeather()
+#       # list1.append(int(response.get("response")));
 
-      # # 응답을 내려주는 json 데이터 
-      # data =  {
-      #    "version": "2.0",
-      #    "resultCode": "OK",
-      #    "output": {
-      #    "location" : "location",  
-      #    "message":  response.get("answer")
+#       # # 응답을 내려주는 json 데이터 
+#       # data =  {
+#       #    "version": "2.0",
+#       #    "resultCode": "OK",
+#       #    "output": {
+#       #    "location" : "location",  
+#       #    "message":  response.get("answer")
 
-      #    },   
-      #       "directives": []
-      #         }
+#       #    },   
+#       #       "directives": []
+#       #         }
       
-      # # 실제 데이터 응답 
-      # return jsonify(data);
-      return "success"
+#       # # 실제 데이터 응답 
+#       # return jsonify(data);
+#       return "success"
 
 
 
-# 옷을 정리하는 로직    
-@NuguSpeaker.route("/answer-arrangement")
-class NuguArrangement(Resource):
-    def post(self):
-          
-         #  answer = answerArrangement(list1);
-          
-         #  data =  {
-         #   "version": "2.0",
-         #   "resultCode": "OK",
-         #    "output": {
-         #    "location" : "location",  
-         #    "message2":  answer
-         #    },   
-         #     "directives": []
-         #      }
-         #  return jsonify(data);
-        return "success"
-        
-# @NuguSpeaker.route("/answer-color")
-# class NuguAnswerColor(Resource):
+# # 옷을 정리하는 로직    
+# @NuguSpeaker.route("/answer-arrangement")
+# class NuguArrangement(Resource):
 #     def post(self):
+          
+#          #  answer = answerArrangement(list1);
+          
+#          #  data =  {
+#          #   "version": "2.0",
+#          #   "resultCode": "OK",
+#          #    "output": {
+#          #    "location" : "location",  
+#          #    "message2":  answer
+#          #    },   
+#          #     "directives": []
+#          #      }
+#          #  return jsonify(data);
+#         return "success"
+        
+# # @NuguSpeaker.route("/answer-color")
+# # class NuguAnswerColor(Resource):
+# #     def post(self):
        
-#        result = request.json;
-#        print(result);
-#        color = result.get("action").get("parameters").get("color").get("value");
-#        findClothes = Cloth.query.filter(Cloth.color == color).all();
-#        print(findClothes);
-#        return "success"
+# #        result = request.json;
+# #        print(result);
+# #        color = result.get("action").get("parameters").get("color").get("value");
+# #        findClothes = Cloth.query.filter(Cloth.color == color).all();
+# #        print(findClothes);
+# #        return "success"
   

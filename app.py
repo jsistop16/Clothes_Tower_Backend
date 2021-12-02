@@ -5,7 +5,7 @@ import os
 # from google.protobuf.json_format import MessageToJson
 from flask_restx import Api
 from flask import Flask
-# from Nugu.nuguRoute import NuguSpeaker
+from Nugu.nuguRoute import NuguSpeaker
 from Back.back import Clothes
 from DB.models import db
 
