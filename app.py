@@ -20,8 +20,8 @@ db.init_app(app);
 #===== REST API 세팅하는 과정 =======
 
 api = Api(app);
-api.add_namespace(Clothes, '/clothes')      # backend 
-api.add_namespace(NuguSpeacker, '/nugu')    # nugu speaker
+# api.add_namespace(Clothes, '/clothes')      # backend 
+# api.add_namespace(NuguSpeacker, '/nugu')    # nugu speaker
 
 if __name__ == "__main__":
     
