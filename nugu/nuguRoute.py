@@ -54,14 +54,14 @@ class NuguArrangement(Resource):
           return jsonify(data);
         
         
-@NuguSpeacker.route("/answer-color")
-class NuguAnswerColor(Resource):
-    def post(self):
+# @NuguSpeacker.route("/answer-color")
+# class NuguAnswerColor(Resource):
+#     def post(self):
        
-       result = request.json;
-       print(result);
-       color = result.get("action").get("parameters").get("color").get("value");
-       findClothes = Cloth.query.filter(Cloth.color == color).all();
-       print(findClothes);
-       return "success"
-       
+#        result = request.json;
+#        print(result);
+#        color = result.get("action").get("parameters").get("color").get("value");
+#        findClothes = Cloth.query.filter(Cloth.color == color).all();
+#        print(findClothes);
+#        return "success"
+  
