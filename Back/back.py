@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from flask_restx import Resource, Api, Namespace
+from flask_restx import Resource, Namespace
 from DB.models import Cloth, db
 
 Clothes = Namespace('Clothes')

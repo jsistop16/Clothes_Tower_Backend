@@ -1,6 +1,5 @@
-from flask import request, jsonify
-from flask_restx import Resource, Api, Namespace
-from DB.models import Cloth
+from flask import  jsonify
+from flask_restx import Resource, Namespace
 from Nugu.answerWeather import answerWeather
 from Nugu.answerArrangement import answerArrangement
 NuguSpeacker = Namespace('NuguSpeaker');

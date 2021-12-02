@@ -2,7 +2,7 @@ import pytz
 import requests 
 from datetime import  datetime, timedelta
 import os
-import json
+
 
 def answerWeather():
       tz = pytz.timezone('Asia/Seoul')

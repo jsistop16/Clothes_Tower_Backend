@@ -1,5 +1,4 @@
 import os
-import io
 # from google.cloud import vision
 # from google.cloud.vision_v1 import AnnotateImageResponse
 # from google.cloud.vision_v1.services.image_annotator import client
@@ -7,7 +6,7 @@ import io
 from flask_restx import Api
 from flask import Flask
 from Back.back import Clothes
-from DB.models import Cloth , db
+from DB.models import db
 from Nugu.nuguRoute import NuguSpeacker
 
 
