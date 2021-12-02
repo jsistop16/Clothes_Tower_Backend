@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from flask_restx import Resource, Api, Namespace
+from DB.models import Cloth
 from Nugu.answerWeather import answerWeather
 from Nugu.answerArrangement import answerArrangement
 NuguSpeacker = Namespace('NuguSpeaker');
@@ -53,3 +54,14 @@ class NuguArrangement(Resource):
           return jsonify(data);
         
         
+@NuguSpeacker.route("/answer-color")
+class NuguAnswerColor(Resource):
+    def post(self):
+       
+       result = request.json;
+       print(result);
+       color = result.get("action").get("parameters").get("color").get("value");
+       findClothes = Cloth.query.filter(Cloth.color == color).all();
+       print(findClothes);
+       return "success"
+       
