@@ -27,5 +27,5 @@ api.add_namespace(Clothes, '/clothes')      # backend
 if __name__ == "__main__":
     
     db.create_all();
-    app.run(host='0.0.0.0', debug=False);
+    app.run(host='0.0.0.0', debug=True);
    
