@@ -1,4 +1,4 @@
-# from flask import  jsonify, request
+from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 from NUGU.answerWeather import answerWeather
 from NUGU.answerArrangement import answerArrangement
@@ -56,14 +56,14 @@ class NuguArrangement(Resource):
           return jsonify(data);
         
         
-# # @NuguSpeaker.route("/answer-color")
-# # class NuguAnswerColor(Resource):
-# #     def post(self):
+@NuguSpeaker.route("/answer-color")
+class NuguAnswerColor(Resource):
+    def post(self):
        
-# #        result = request.json;
-# #        print(result);
-# #        color = result.get("action").get("parameters").get("color").get("value");
-# #        findClothes = Cloth.query.filter(Cloth.color == color).all();
-# #        print(findClothes);
-# #        return "success"
+       result = request.json;
+       print(result);
+       color = result.get("action").get("parameters").get("color").get("value");
+       findClothes = Cloth.query.filter(Cloth.color == color).all();
+       print(findClothes);
+       return "success"
   
