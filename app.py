@@ -7,7 +7,7 @@ from flask_restx import Api
 from flask import Flask
 from Back.back import Clothes
 from DB.models import db
-# from Nugu.nuguRoute import NuguSpeacker
+from Nugu.nuguRoute import NuguSpeacker
 
 
 app = Flask(__name__);
