@@ -42,7 +42,7 @@ class NuguArrangement(Resource):
     def post(self):
           
           answer = answerArrangement(list1);
-          
+          print("옷 정리 가능?")
           data =  {
            "version": "2.0",
            "resultCode": "OK",
