@@ -7,7 +7,7 @@ from flask_restx import Api
 from flask import Flask
 from Back.back import Clothes
 from DB.models import db
-from Nugu.nuguRoute import NuguSpeacker
+from Nugu.nuguRoute import NuguSpeaker
 
 
 app = Flask(__name__);
@@ -21,7 +21,7 @@ db.init_app(app);
 
 api = Api(app);
 api.add_namespace(Clothes, '/clothes')      # backend 
-api.add_namespace(NuguSpeacker, '/nugu')    # nugu speaker
+api.add_namespace(NuguSpeaker, '/nugu')    # nugu speaker
 
 if __name__ == "__main__":
     
