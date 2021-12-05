@@ -38,7 +38,7 @@ cameraTrigger.addEventListener("click", async function () {
   let formData = new FormData();
   formData.append("file", file);
 
-  let response = await fetch("http://localhost:5000/image", {
+  let response = await fetch("http://13.125.142.207/image", {
     method: "POST",
     body: formData,
   });
