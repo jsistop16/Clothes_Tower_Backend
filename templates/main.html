@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Camera Web App</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+  </head>
+
+  <body>
+    <div id="header">
+      <h3>Simple Web Camera</h3>
+      <p>버튼을 클릭 하세요.</p>
+    </div>
+
+    <!-- main 태그는 문서의 주요 내용을 담는 태그이다. 한 문서에 한개 존재 해야 한다.
+        또한 article, aside, header, nav, footer등 요소의 하위에 사용해서는 안된다.
+    -->
+    <main id="camera">
+      <canvas id="camera--sensor"></canvas>
+
+      <!-- 기기의 카메라에 접근하여 영상을 페이지에 재생한다. -->
+      <video id="camera--view" autoplay playsinline></video>
+
+      <img src="//:0" alt="" id="camera--output" />
+
+      <button id="camera--trigger">사진촬영</button>
+    </main>
+    <script src="{{url_for('static',filename='main.js')}}"></script>
+  </body>
+</html>

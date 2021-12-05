@@ -46,12 +46,10 @@ def run_vision(file_name):
 #===== REST API 세팅하는 과정 =======
 
 api = Api(app);
-@api.route("/render")
-class Upload(Resource):
-  def get(self):
-    return render_template("index.html");
-  
 
+@app.route("/render")
+def index():
+  return render_template('main.html');
 
 api.add_namespace(NuguSpeaker, '/nugu')
 api.add_namespace(Clothes, '/clothes')     
