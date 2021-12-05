@@ -9,6 +9,7 @@ from NUGU.nuguRoute import NuguSpeaker
 from Back.back import Clothes
 from DB.models import db
 import io
+import ssl
 
 from flask_cors import CORS
 
@@ -80,6 +81,8 @@ class Image(Resource):
 if __name__ == "__main__":
     
     db.create_all();
+   
+
     
-    app.run(host='127.0.0.1', debug=False);
+    app.run(host='0.0.0.0', debug=False);
    
