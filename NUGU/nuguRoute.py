@@ -8,6 +8,9 @@ NuguSpeaker = Namespace("NuguSpeaker")
 global list1  
 list1 = [];
 
+
+
+
 @NuguSpeaker.route("/answer-weather")
 class NuguApi(Resource):
    
