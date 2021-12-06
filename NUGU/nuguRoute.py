@@ -111,7 +111,7 @@ class Image(Resource):
      db.session.commit();
      db.session.remove();
      print("DB 입력 완료됐습니다.")
-
+     
 
 @NuguSpeaker.route("/close")
 class Answer(Resource):
@@ -119,12 +119,13 @@ class Answer(Resource):
     def post(self):
         
      global color
-  
+     findClothes = Cloth.query.filter(Cloth.color == color).all();
      data =  {
           "version": "2.0",
           "resultCode": "OK",
           "output": {
-          "colorResult": color 
+          "colorResult": color ,
+          "countcolor" : len(findClothes)
             },   
              "directives": []
               }
