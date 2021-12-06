@@ -131,7 +131,7 @@
         let formData = new FormData();
         formData.append("file", file);
 
-        let response = await fetch("https://jmsteady.net/image", {
+        let response = await fetch("/image", {
           method: "POST",
           body: formData,
         });
