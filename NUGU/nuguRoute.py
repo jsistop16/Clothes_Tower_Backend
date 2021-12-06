@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 from NUGU.answerWeather import answerWeather
@@ -94,17 +95,21 @@ class Image(Resource):
     result = run_vision("./upload/test.png");
     result2 = result.dominant_colors.colors[0].color;
     colorResult = pickColor(int(result2.red),int(result2.green),int(result2.blue));
-    print(colorResult);
-    global color
-    color = colorResult;
-    clothes= Cloth(top_bottom="top",
+    if colorResult == nullcontext :
+       print("다시 색상을 인식시키세요")
+       return "잘못된 입력값입니다"
+    else :
+     print(colorResult);
+     global color
+     color = colorResult;
+     clothes= Cloth(top_bottom="top",
                     long_short="long",
                     color=colorResult,
                     material="ull");
-    db.session.add(clothes);
-    db.session.commit();
-    db.session.remove();
-    print("DB 입력 완료됐습니다.")
+     db.session.add(clothes);
+     db.session.commit();
+     db.session.remove();
+     print("DB 입력 완료됐습니다.")
 
 
 @NuguSpeaker.route("/close")
