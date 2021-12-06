@@ -82,7 +82,7 @@ class NuguAnswerColor(Resource):
               }
        return jsonify(data)
        
-@NuguSpeaker.route("image")
+@NuguSpeaker.route("/image")
 class Image(Resource):
    def post(self):
     from PIL import Image
