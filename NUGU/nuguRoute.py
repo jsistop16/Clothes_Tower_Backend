@@ -95,7 +95,7 @@ class Image(Resource):
     result = run_vision("./upload/test.png");
     result2 = result.dominant_colors.colors[0].color;
     colorResult = pickColor(int(result2.red),int(result2.green),int(result2.blue));
-    if colorResult == nullcontext :
+    if colorResult == None :
        print("다시 색상을 인식시키세요")
        return "잘못된 입력값입니다"
     else :
