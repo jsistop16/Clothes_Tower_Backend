@@ -9,8 +9,8 @@ from NUGU.nuguRoute import NuguSpeaker
 from Back.back import Clothes
 from DB.models import db
 import io
-import ssl
-from DB.models import Cloth
+
+# from DB.models import Cloth
 from flask_cors import CORS
 
 
@@ -56,28 +56,8 @@ api.add_namespace(NuguSpeaker, '/nugu')
 api.add_namespace(Clothes, '/clothes')     
 
 
-@api.route("/image")
-class Image(Resource):
-  
-  def post(self):
-    from PIL import Image
-    from connect_server import pickColor
-    file = request.files['file']
-    img = Image.open(file.stream);
-    img.save("./upload/test.png");
-    result = run_vision("./upload/test.png");
-    result2 = result.dominant_colors.colors[0].color;
-    colorResult = pickColor(int(result2.red),int(result2.green),int(result2.blue));
-    print(colorResult);
-    clothes= Cloth(top_bottom="top",
-                    long_short="long",
-                    color=colorResult,
-                    material="ull");
-    db.session.add(clothes);
-    db.session.commit();
-    db.session.remove();
-    
-    return jsonify({"message" : "success"});
+
+
     
 
 

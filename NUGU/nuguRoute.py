@@ -2,12 +2,13 @@ from flask import  jsonify, request
 from flask_restx import Resource, Namespace
 from NUGU.answerWeather import answerWeather
 from NUGU.answerArrangement import answerArrangement
-from DB.models import Cloth
+from DB.models import Cloth ,db
 
 NuguSpeaker = Namespace("NuguSpeaker")
 global list1  
 list1 = [];
-
+global color
+color = "디폴트"
 
 
 
@@ -81,4 +82,44 @@ class NuguAnswerColor(Resource):
               }
        return jsonify(data)
        
+@NuguSpeaker.route("image")
+class Image(Resource):
+   def post(self):
+    from PIL import Image
+    from app import run_vision
+    from connect_server import pickColor
+    file = request.files['file']
+    img = Image.open(file.stream);
+    img.save("./upload/test.png");
+    result = run_vision("./upload/test.png");
+    result2 = result.dominant_colors.colors[0].color;
+    colorResult = pickColor(int(result2.red),int(result2.green),int(result2.blue));
+    print(colorResult);
+    global color
+    color = colorResult;
+    clothes= Cloth(top_bottom="top",
+                    long_short="long",
+                    color=colorResult,
+                    material="ull");
+    db.session.add(clothes);
+    db.session.commit();
+    db.session.remove();
+    print("DB 입력 완료됐습니다.")
+
+
+@NuguSpeaker.route("/close")
+class Answer(Resource):
   
+    def post(self):
+        
+     global color
+  
+     data =  {
+          "version": "2.0",
+          "resultCode": "OK",
+          "output": {
+          "colorResult": color 
+            },   
+             "directives": []
+              }
+     return jsonify(data);
