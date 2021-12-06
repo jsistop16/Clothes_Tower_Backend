@@ -1,5 +1,6 @@
 from contextlib import nullcontext
 from flask import  jsonify, request
+from flask.templating import render_template
 from flask_restx import Resource, Namespace
 from NUGU.answerWeather import answerWeather
 from NUGU.answerArrangement import answerArrangement
@@ -97,7 +98,7 @@ class Image(Resource):
     colorResult = pickColor(int(result2.red),int(result2.green),int(result2.blue));
     if colorResult == None :
        print("다시 색상을 인식시키세요")
-       return "잘못된 입력값입니다"
+       return render_template('../main.html')
     else :
      print(colorResult);
      global color
