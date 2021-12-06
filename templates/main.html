@@ -126,7 +126,7 @@
         }
 
         const file = new Blob([new Uint8Array(array)], { type: "image/jpeg" });
-        // const fileName = "canvas_img_" + new Date().getMilliseconds() + ".jpg";
+
         console.log(file);
         let formData = new FormData();
         formData.append("file", file);
