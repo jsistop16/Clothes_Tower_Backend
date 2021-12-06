@@ -98,7 +98,7 @@ class Image(Resource):
     colorResult = pickColor(int(result2.red),int(result2.green),int(result2.blue));
     if colorResult == None :
        print("다시 색상을 인식시키세요")
-       return render_template('main.html')
+       return render_template('error.html')
     else :
      print(colorResult);
      global color
