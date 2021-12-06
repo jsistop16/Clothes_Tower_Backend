@@ -131,7 +131,7 @@
         let formData = new FormData();
         formData.append("file", file);
 
-        let response = await fetch("/image", {
+        let response = await fetch("/nugu/image", {
           method: "POST",
           body: formData,
         });
