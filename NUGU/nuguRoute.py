@@ -1,6 +1,6 @@
 from contextlib import nullcontext
 from flask import  jsonify, request
-from flask.templating import render_template
+from flask import render_template
 from flask_restx import Resource, Namespace
 from NUGU.answerWeather import answerWeather
 from NUGU.answerArrangement import answerArrangement
