@@ -119,13 +119,17 @@ class Answer(Resource):
     def post(self):
         
      global color
-     findClothes = Cloth.query.filter(Cloth.color == color).all();
+     findClothesRed = Cloth.query.filter(Cloth.color == "빨간색").all();
+     findClothesGreen = Cloth.query.filter(Cloth.color == "초록색").all();
+     findClothesBlue = Cloth.query.filter(Cloth.color == "파란색").all();
      data =  {
           "version": "2.0",
           "resultCode": "OK",
           "output": {
           "colorResult": color ,
-          "countcolor" : len(findClothes)
+          "countred" : len(findClothesRed),
+          "countgreen" : len(findClothesGreen),
+          "countblue" : len(findClothesBlue)
             },   
              "directives": []
               }
