@@ -129,6 +129,10 @@ class Answer(Resource):
      findClothesRed = Cloth.query.filter(Cloth.color == "빨간색").all();
      findClothesGreen = Cloth.query.filter(Cloth.color == "초록색").all();
      findClothesBlue = Cloth.query.filter(Cloth.color == "파란색").all();
+     
+     print(color)
+     print(len(findClothesRed))
+     
      data =  {
           "version": "2.0",
           "resultCode": "OK",
