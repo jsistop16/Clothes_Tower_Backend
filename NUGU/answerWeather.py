@@ -62,9 +62,9 @@ def answerWeather():
       
       response2 = response['response']['body']['items']['item'][0]['fcstValue'];
       
-      if(int(response2) <= 10):
+      if(int(response2) <= 15):
          answer = "현재 시각, 기온는 "+ response2 + "도 입니다. 긴 옷을 추천드립니다. CLOTHES TOWER를 실행할까요?"
-      elif(int(response2) > 10 and int(response2) <= 20):
+      elif(int(response2) > 15 and int(response2) <= 20):
          answer =  "현재 시각, 기온는 "+ response2 + "도 입니다. 환절기이니 외투를 챙기세요. CLOTHES TOWER를 실행할까요?"
       elif(int(response2) > 20):
          answer =  "현재 시각, 기온는 "+ response2 + "도 입니다. 시원한 옷을 추천드립니다. CLOTHES TOWER를 실행할까요?" 
