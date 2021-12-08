@@ -52,6 +52,11 @@ api = Api(app);
 def index():
   return render_template('main.html');
 
+@app.route("/health")
+def healthCheck():
+  return "ok";
+
+
 api.add_namespace(NuguSpeaker, '/nugu')
 api.add_namespace(Clothes, '/clothes')     
 
