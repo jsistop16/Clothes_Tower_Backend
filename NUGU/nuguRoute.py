@@ -145,7 +145,7 @@ class Answer(Resource):
             },   
              "directives": []
               }
-     # checked  = "존재안함"
+     checked  = "존재안함"
      return jsonify(data);
   
   
