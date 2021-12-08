@@ -50,15 +50,23 @@ class NuguApi(Resource):
 @NuguSpeaker.route("/answer-arrangement")
 class NuguArrangement(Resource):
     def post(self):
-          
+          season = ['봄','여름','가을','겨울']
           answer = answerArrangement(list1);
+          value = season.index(answer);
+          print(value);
+          if value == 0 :
+             value = 3
+          else : 
+           answer2= season[value-1];
+          
           print("옷 정리 가능?")
           data =  {
            "version": "2.0",
            "resultCode": "OK",
             "output": {
               
-            "season":  answer
+            "seasonNow":  answer, 
+            "seasonBefore" : answer2
             },   
              "directives": []
               }
