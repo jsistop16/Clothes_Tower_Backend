@@ -4,7 +4,7 @@ def answerArrangement(list):
           cnt1 = 0
           cnt2 = 0 
           cnt3 = 0
-          
+          season = ['봄','여름','가을','겨울']
           # 여기서 조금 더 세분화하면 사계절 구분 가능 
           for i in range(0,num):
              if list[i] < 10:     # 겨울 

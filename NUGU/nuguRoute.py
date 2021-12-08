@@ -11,7 +11,8 @@ global list1
 list1 = [];
 global color
 color = "디폴트"
-
+global checked
+checked = False
 @NuguSpeaker.route("/health")
 class HealthCheck(Resource):
    def get(self):
@@ -105,6 +106,8 @@ class Image(Resource):
     else :
      print(colorResult);
      global color
+     global checked
+     checked = True
      color = colorResult;
      clothes= Cloth(top_bottom="top",
                     long_short="long",
@@ -116,12 +119,13 @@ class Image(Resource):
      print("DB 입력 완료됐습니다.")
      
 
-@NuguSpeaker.route("/enroll-clothes")
+@NuguSpeaker.route("/close")
 class Answer(Resource):
   
     def post(self):
         
      global color
+     global checked
      findClothesRed = Cloth.query.filter(Cloth.color == "빨간색").all();
      findClothesGreen = Cloth.query.filter(Cloth.color == "초록색").all();
      findClothesBlue = Cloth.query.filter(Cloth.color == "파란색").all();
@@ -129,6 +133,7 @@ class Answer(Resource):
           "version": "2.0",
           "resultCode": "OK",
           "output": {
+          "checked" : checked,
           "colorresult": color ,
           "countRed" : len(findClothesRed),
           "countGreen" : len(findClothesGreen),
@@ -136,6 +141,7 @@ class Answer(Resource):
             },   
              "directives": []
               }
+     checked  = False
      return jsonify(data);
   
   
