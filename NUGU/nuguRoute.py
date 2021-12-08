@@ -12,7 +12,10 @@ list1 = [];
 global color
 color = "디폴트"
 
-
+@NuguSpeaker.route("/health")
+class HealthCheck(Resource):
+   def get(self):
+      return "ok";
 
 @NuguSpeaker.route("/answer-weather")
 class NuguApi(Resource):
