@@ -10,8 +10,8 @@ def answerArrangement(list):
              if list[i] < 10:     # 겨울 
                 print(list[i]);
                 cnt1 += 1
-             elif list[i] >= 10 and list[i] < 20:
-                print(list[i])    # 환절기 
+             elif list[i] >= 15 and list[i] < 20:
+                print(list[i])    # 환절기 봄, 가을 
                 cnt2 += 1
              else:                # 여름 
                 cnt3 += 1
