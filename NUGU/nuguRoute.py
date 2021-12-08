@@ -113,7 +113,7 @@ class Image(Resource):
      print("DB 입력 완료됐습니다.")
      
 
-@NuguSpeaker.route("/close")
+@NuguSpeaker.route("/enroll-clothes")
 class Answer(Resource):
   
     def post(self):
@@ -126,11 +126,14 @@ class Answer(Resource):
           "version": "2.0",
           "resultCode": "OK",
           "output": {
-          "colorResult": color ,
-          "countred" : len(findClothesRed),
-          "countgreen" : len(findClothesGreen),
-          "countblue" : len(findClothesBlue)
+          "colorresult": color ,
+          "countRed" : len(findClothesRed),
+          "countGreen" : len(findClothesGreen),
+          "countBlue" : len(findClothesBlue)
             },   
              "directives": []
               }
      return jsonify(data);
+  
+  
+  
