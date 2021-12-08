@@ -1,4 +1,3 @@
-
 import os
 from flask import render_template
 from google.cloud import vision
@@ -9,21 +8,22 @@ from NUGU.nuguRoute import NuguSpeaker
 from Back.back import Clothes
 from DB.models import db
 import io
-
-# from DB.models import Cloth
 from flask_cors import CORS
 
 
 
-
 app = Flask(__name__);
+
+# 이미지 촬영 웹사이트와의 CORS 문제 해결 
 CORS(app)
+
 # 환경변수를 사용해서 RDS HOST를 숨김 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("FLASK_DB")  
 app.config['SQLALCHEMY_ECHO'] = True;
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False;
 db.init_app(app);
 
+# GOOGLE VISION API 이미지 색상 추출 
 def run_vision(file_name):
   
   
@@ -44,20 +44,22 @@ def run_vision(file_name):
   return labels;        
 
 
-#===== REST API 세팅하는 과정 =======
-
+# REST API 경로 세팅 
 api = Api(app);
 
 @app.route("/render")
 def index():
   return render_template('main.html');
 
+# NUGU SPEAKER 백엔드 프록시 정상 작동 체크 
 @app.route("/health")
 def healthCheck():
   return "ok";
 
-
+# NUGU SPEAKER 진입점 
 api.add_namespace(NuguSpeaker, '/nugu')
+
+# DB 접근 진입점 
 api.add_namespace(Clothes, '/clothes')     
 
 
@@ -73,8 +75,5 @@ api.add_namespace(Clothes, '/clothes')
 if __name__ == "__main__":
     
     db.create_all();
-   
-
-    
     app.run(host='0.0.0.0', debug=False);
    
