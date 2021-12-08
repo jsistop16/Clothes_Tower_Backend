@@ -134,14 +134,14 @@ class Answer(Resource):
           "resultCode": "OK",
           "output": {
           "checked" : checked,
-          "colorresult": color ,
-          "countRed" : len(findClothesRed),
-          "countGreen" : len(findClothesGreen),
-          "countBlue" : len(findClothesBlue)
+          "colorResult": color ,
+          "countred" : len(findClothesRed),
+          "countgreen" : len(findClothesGreen),
+          "countblue" : len(findClothesBlue)
             },   
              "directives": []
               }
-     checked  = "존재안함"
+     # checked  = "존재안함"
      return jsonify(data);
   
   
