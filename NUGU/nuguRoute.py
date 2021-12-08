@@ -12,7 +12,7 @@ list1 = [];
 global color
 color = "디폴트"
 global checked
-checked = False
+checked = "존재안함"
 @NuguSpeaker.route("/health")
 class HealthCheck(Resource):
    def get(self):
@@ -107,7 +107,7 @@ class Image(Resource):
      print(colorResult);
      global color
      global checked
-     checked = True
+     checked = "존재"
      color = colorResult;
      clothes= Cloth(top_bottom="top",
                     long_short="long",
@@ -141,7 +141,7 @@ class Answer(Resource):
             },   
              "directives": []
               }
-     checked  = False
+     checked  = "존재안함"
      return jsonify(data);
   
   
