@@ -1,11 +1,10 @@
-from contextlib import nullcontext
 from flask import  jsonify, request
 from flask import render_template
 from flask_restx import Resource, Namespace
 from NUGU.answerWeather import answerWeather
 from NUGU.answerArrangement import answerArrangement
 from DB.models import Cloth ,db
-import cv2
+
 NuguSpeaker = Namespace("NuguSpeaker")
 global list1  
 list1 = [];
@@ -13,20 +12,6 @@ global color
 color = "디폴트"
 global checked
 checked = "존재안함"
-
-def increase_brightness(img, value): 
-   hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-   h, s, v = cv2.split(hsv)
-   lim = 255 - value
-   v[v > lim] = 255
-   v[v <= lim] += value
-   final_hsv = cv2.merge((h, s, v))
-   img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
-   return img
-
-
-
-
 
 @NuguSpeaker.route("/health")
 class HealthCheck(Resource):
@@ -120,22 +105,7 @@ class Image(Resource):
     file = request.files['file']
     img = Image.open(file.stream);
     img.save("./upload/test.png");
-    # test
-   #  sr = cv2.dnn_superres.DnnSuperResImpl_create()
-   #  sr.readModel('')
-   #  sr.setModel('edsr', 4)
-   #  #이미지 로드하기
-   #  img = cv2.imread('./upload/test.png')
-   #  #이미지 추론하기 ( 해당 함수는 전처리와 후처리를 함꺼번에 해준다)
-   #  result = sr.upsample(img)
-   #  # sample = cv2.imread('./upload/test.png');
-   #  # result = increase_brightness(sample, 10)
-   #  cv2.imwrite('./upload/test.png', result)
-   #  cv2.waitKey(0)
-   #  cv2.destroyAllWindows()
-
-
-
+  
     result = run_vision("./upload/test.png");
     result2 = result.dominant_colors.colors[0].color;
     colorResult = pickColor(int(result2.red),int(result2.green),int(result2.blue));
