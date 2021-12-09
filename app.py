@@ -6,10 +6,9 @@ from flask_restx import Api, Resource
 from flask import Flask ,request, jsonify
 from NUGU.nuguRoute import NuguSpeaker
 from Back.back import Clothes
-from DB.models import db
+from DB.models import Cloth, db
 import io
 from flask_cors import CORS
-
 
 
 app = Flask(__name__);
@@ -50,6 +49,11 @@ api = Api(app);
 @app.route("/render")
 def index():
   return render_template('main.html');
+
+@app.route("/showDB")
+def showDB():
+  clothes = Cloth.query.all();
+  return render_template('showDB.html',dataList = clothes);
 
 # NUGU SPEAKER 백엔드 프록시 정상 작동 체크 
 @app.route("/health")

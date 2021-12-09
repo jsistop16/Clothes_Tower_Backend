@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .header {
+        text-align: center;
+        font-size: xx-large;
+        font-weight: 700;
+        margin-bottom: 40px;
+      }
+      .list_list {
+        list-style: none;
+      }
+      .data {
+        display: flex;
+        margin: auto 0;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-left: 0;
+        margin-block-start: 0;
+        padding-inline-start: 0;
+      }
+      .list {
+        border: 5px #868e96 solid;
+        border-radius: 10px;
+        list-style: none;
+        margin-bottom: 1rem;
+        padding: 10px;
+        font-size: x-large;
+        width: 400px;
+        text-align: center;
+        margin-left: 0;
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="header">CLOTHES TOWER DATABASE</div>
+    </section>
+    <hr />
+    <ul class="data">
+      {% for data in dataList %}
+      <li class="list">
+        <ul style="padding-inline-start: 0">
+          <li class="list_list">COLOR : {{data.color}}</li>
+          <li class="list_list">TOP_BOTTOM : {{data.top_bottom}}</li>
+          <li class="list_list">MATERIAL : {{data.material}}</li>
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
