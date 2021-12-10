@@ -65,7 +65,7 @@ class NuguArrangement(Resource):
            "resultCode": "OK",
             "output": {
               
-            "seasonNow":  "환절기", 
+            "seasonNow":  answer, 
             "seasonBefore" : answer2
             },   
              "directives": []
