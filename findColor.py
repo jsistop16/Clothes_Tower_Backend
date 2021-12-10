@@ -7,7 +7,7 @@ def pickColor(red,green,blue):
 
    print(red,green,blue);
   #빨간색 옷
-   if red >= 170 :
+   if red >= 160 :
      
     ## if green >= 190 and blue >= 190 : 
      ##  return "흰색"
