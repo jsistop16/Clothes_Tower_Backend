@@ -52,8 +52,13 @@ def index():
 
 @app.route("/showDB")
 def showDB():
-  clothes = Cloth.query.all();
-  return render_template('showDB.html',dataList = clothes);
+  order = request.args.get('color')
+  if order == None : 
+    clothes = Cloth.query.all();
+  else:
+    clothes = Cloth.query.filter(Cloth.color == order).all();  
+  
+  return render_template('showDB.html',dataList = clothes, image_file="image/옷걸이봉.jpg");
 
 # NUGU SPEAKER 백엔드 프록시 정상 작동 체크 
 @app.route("/health")
