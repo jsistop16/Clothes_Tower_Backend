@@ -25,7 +25,7 @@ def pickColor(red,green,blue):
      
   
   #초록색 옷    
-   elif green >= 170 :
+   elif green >= 160 :
     
      if red<=120 and blue <= 120 :
       
